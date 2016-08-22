@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Discuz</title>
+    <style type="text/css">
+        body, div, span, a, h1, p, img, ul, li {
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        body {
+            font-family: "Arial", sans-serif;
+            font-size: 14px;
+            color: #000;
+        }
+
+        .box {
+            width: 235px;
+            height: 655px;
+            background: #E5EDF2;
+            border: 1px solid grey;
+            margin: 12px 90px;
+        }
+
+        .header {
+            position: relative;
+            display: block;
+            height: 51px;
+            line-height: 51px;
+            padding-left: 25px;
+            border-bottom: 1px dashed grey;
+        }
+
+        #miaovlogo {
+            margin: 16px 30px 0 30px;
+        }
+
+        .level {
+            margin: 0 0 15px 28px;
+
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            border: 0;
+            vertical-align: middle;
+        }
+
+        .level li {
+            position: relative;
+            line-height: 24px;
+            float: left;
+            margin: 2px;
+        }
+
+        .middle {
+            display: block;
+            position: relative;
+            height: 16px;
+            line-height: 16px;
+            margin: 25px 0 15px 30px;
+        }
+
+        table {
+            position: relative;
+            clear: both;
+            margin: 0 0 97px 30px;
+            font-weight: 600;
+            width: 186px;
+            height: 196px;
+        }
+
+        td {
+            width: 86px;
+        }
+
+        .foot {
+            position: absolute;
+            top: 616px;
+            display: block;
+            width: 205px;
+            height: 51px;
+            line-height: 51px;
+            padding-left: 25px;
+            border-bottom: 1px dashed grey;
+            border-top: 2px solid grey;
+        }
+
+        #Details {
+            font-size: 14px;
+            font-weight: 600;
+            display: none;
+            z-index: 20;
+            position: absolute;
+            top: 65px;
+            width: 642px;
+            height: 307px;
+            border: 1px solid grey;
+            background: #fff;
+        }
+
+        .DetailsTable {
+            width: 402px;
+            height: 135px;
+            margin-left: 0;
+        }
+
+        .miaovlogo2 {
+            margin: 16px 30px 20px 30px;
+            float: left;
+        }
+
+        .left {
+            float: left;
+            width: 235px;
+            height: 304px;
+        }
+
+        .right {
+            width: 406px;
+            float: left;
+            height: 304px;
+        }
+
+        .share {
+            float: left;
+            display: block;
+            width: 104px;
+            height: 25px;
+            line-height: 25px;
+            margin: 0 0 3px 30px;
+        }
+
+        .online {
+            height: 16px;
+            display: block;
+            margin: 16px 0;
+        }
+
+        ul {
+            position: relative;
+        }
+
+        li {
+            float: left;
+            list-style-type: none;
+            margin: 2px;
+        }
+
+    </style>
+
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var logo = document.getElementById("miaovlogo");
+            var oDetails = document.getElementById("Details");
+            logo.onmouseover = function show() {
+                oDetails.style.display = "block"
+            };
+            logo.onmouseout = function hidden() {
+                oDetails.style.display = "none"
+            };
+        }
+
+    </script>
+
+</head>
+<body>
+<div class="box">
+    <span class="header"><a href="javascript(0):"> miaov.com</a></span>
+
+    <div id="miaovlogo">
+        <img src="images/Discuz_01.png"/>
+    </div>
+
+    <div id="Details">
+        <div class="left">
+            <div class="miaovlogo2">
+                <img src="images/Discuz_01.png"/>
+            </div>
+            <a href="javascript(0);"><span class="share">
+                <img src="images/ico_message.png" style="margin-right: 5px">
+                <label>发送信息</label> </span>
+            </a>
+            <a href="javascript(0);"><span class="share">
+                <img src="images/ico_friend.png" style="margin-right: 5px">
+                <label>加为好友</label></span>
+            </a>
+        </div>
+        <div class="right">
+            <span class="online">leo当前在线</span>
+            <table class="DetailsTable">
+                <tr>
+                    <td>积分</td>
+                    <td>1623</td>
+                    <td>阅读权限</td>
+                    <td>80</td>
+                </tr>
+                <tr>
+                    <td>最后登录</td>
+                    <td>2010-9-14</td>
+                    <td>精华</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>帖子</td>
+                    <td>1643</td>
+                    <td>威望</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>金币</td>
+                    <td>23个</td>
+                    <td>体力</td>
+                    <td>2380</td>
+                </tr>
+                <tr>
+                    <td>激情</td>
+                    <td>1643</td>
+                    <td>注册时间</td>
+                    <td>2010-9-24</td>
+                </tr>
+                <tr>
+                    <td>
+                        <ul style="margin-top: 15px">
+                            <li><a href="javascript():"><img src="images/ico_qq.png"/></a></li>
+                            <li><a href="javascript():"><img src="images/ico_home.png"/></a></li>
+                            <li><a href="javascript():"><img src="images/ico_card.png"/></a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <span class="middle"><a href="javascript(0):"> miaov.com</a></span>
+
+    <div class="level">
+        <ul>
+            <li><a href="javascript(0):"><img src="images/Discuz_02.png"></a></li>
+            <li><a href="javascript(0):"><img src="images/Discuz_02.png"></a></li>
+            <li><a href="javascript(0):"><img src="images/Discuz_02.png"></a></li>
+        </ul>
+    </div>
+    <table class="info">
+        <tr>
+            <td>积分</td>
+            <td>3850</td>
+        </tr>
+        <tr>
+            <td>UID分</td>
+            <td>1001952</td>
+        </tr>
+        <tr>
+            <td>帖子</td>
+            <td>3502</td>
+        </tr>
+        <tr>
+            <td>威望</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>金币</td>
+            <td>672个</td>
+        </tr>
+        <tr>
+            <td>体力</td>
+            <td>756</td>
+        </tr>
+        <tr>
+            <td>激情</td>
+            <td>3068</td>
+        </tr>
+        <tr>
+            <td>注册时间</td>
+            <td>2008-10-4</td>
+        </tr>
+    </table>
+    <span class="foot"><a href="javascript(0):"> miaov.com</a></span>
+
+</div>
+</body>
+</html>
