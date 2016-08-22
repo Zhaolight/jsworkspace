@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>miaov Test</title>
+    <style type="text/css">
+        ul, li, h1, body {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            color: #000;
+        }
+
+        h1 {
+            margin: 20px 0 15px 30px;
+            float: left;
+            height: 44px;
+            line-height: 44px;
+        }
+
+        #box {
+            position: relative;
+            background: #EFEFEF;
+            width: 740px;
+            height: 425px;
+            margin: 240px auto;
+            border: 1px solid #00ff00;
+        }
+
+        #btn {
+            margin-top: 20px;
+            float: left;
+            width: 104px;
+            height: 44px;
+            color: #fff;
+            background: red;
+            outline-style: none;
+        }
+
+        #myBox {
+            position: relative;
+            width: 105px;
+            height: 105px;
+            margin: 60px 0 15px 30px;
+            border: 5px solid #000;
+            z-index: 20;
+        }
+
+        #controlBox {
+            display: none;
+            background: #fff;
+            float: right;
+            position: absolute;
+            right: 25px;
+            bottom: 25px;
+            width: 300px;
+            height: 200px;
+            border: 20px solid #9C949C;
+        }
+
+        span {
+            padding-left: 20px;
+            float: left;
+            display: block;
+            width: 120px;
+            height: 35px;
+            line-height: 35px;
+        }
+
+        .row {
+            margin-top: 10px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+        }
+
+        .red {
+            background: #9CCe00;
+            width: 35px;
+            height: 35px;
+            border: 0;
+        }
+
+        .yellow {
+            background: #EFBD00;
+            width: 35px;
+            height: 35px;
+            border: 0;
+        }
+
+        .blue {
+            background: #5A94EF;
+            width: 35px;
+            height: 35px;
+            border: 0;
+        }
+
+        .normol {
+            background: #EFEFEF;
+            border: 1px solid #808080;
+            width: 35px;
+            height: 35px;
+        }
+
+        .btn2 {
+            width: 60px;
+            height: 30px;
+            background: #002952;
+            color: #fff;
+            border: 0;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var oBox = document.getElementById("box");
+            var Box = document.getElementById("myBox");
+            var oBtn = document.getElementById("btn");
+            var control = document.getElementById("controlBox");
+            var oRed = document.getElementById("red");
+            var oYellow = document.getElementById("yellow");
+            var oBlue = document.getElementById("blue");
+            var w200 = document.getElementById("w200");
+            var w300 = document.getElementById("w300");
+            var w400 = document.getElementById("w400");
+            var h200 = document.getElementById("h200");
+            var h300 = document.getElementById("h300");
+            var h400 = document.getElementById("h400");
+            //构造可以改变对象属性的函数；
+            function changestyle(elem, attribute, value) {
+                elem.style[attribute] = value
+            }
+
+            oBtn.onclick = function () {
+                changestyle(control, "display", "block")
+            };
+            oRed.onmouseover = function () {
+                changestyle(this, "background", "red")
+            };
+            oRed.onmouseout = function () {
+                changestyle(this, "background", "#9CCe00")
+            };
+            oRed.onclick = function () {
+                changestyle(Box, "background", "#9CCe00")
+            };
+
+
+            oYellow.onmouseover = function () {
+                changestyle(this, "background", "yellow")
+            };
+            oYellow.onmouseout = function () {
+                changestyle(this, "background", "#EFBD00")
+            };
+            oYellow.onclick = function () {
+                changestyle(Box, "background", "yellow")
+            };
+
+            oBlue.onmouseover = function () {
+                changestyle(this, "background", "blue")
+            };
+            oBlue.onmouseout = function () {
+                changestyle(this, "background", "#5A94EF")
+            };
+            oBlue.onclick = function () {
+                changestyle(Box, "background", "blue")
+            };
+            function change() {
+                this.style.background = "orange"
+            }
+
+            function recover() {
+                this.style.cssText = '';
+            }
+
+            w200.onmouseover = change;
+            w200.onmouseout = recover;
+            w200.onclick = function () {
+                Box.style.width = "200px";
+            };
+            w300.onmouseover = change;
+            w300.onmouseout = recover;
+            w300.onclick = function () {
+                Box.style.width = "300px";
+            };
+            w400.onmouseover = change;
+            w400.onmouseout = recover;
+            w400.onclick = function () {
+                Box.style.width = "400px";
+            };
+            h200.onmouseover = change;
+            h200.onmouseout = recover;
+            h200.onclick = function () {
+                Box.style.height = "200px";
+            };
+            h300.onmouseover = change;
+            h300.onmouseout = recover;
+            h300.onclick = function () {
+                Box.style.height = "300px";
+            };
+            h400.onmouseover = change;
+            h400.onmouseout = recover;
+            h400.onclick = function () {
+                Box.style.height = "400px";
+            };
+            reset.onclick = function () {
+                Box.style.cssText = '';
+            };
+            var ok = document.getElementById("ok");
+            ok.onclick = function () {
+                control.style.display = "none"
+            };
+        }
+    </script>
+</head>
+<body>
+<div id="box">
+    <h1>请为下面的DiV设置样式：</h1>
+    <input type="button" value="点击设置" id="btn">
+
+    <div id="myBox"></div>
+    <div id="controlBox">
+        <div class="row">
+            <span>请选择背景色：</span>
+            <input type="button" id="red" value="红" class="red">
+            <input type="button" id="yellow" value="黄" class="yellow">
+            <input type="button" id="blue" value="蓝" class="blue">
+        </div>
+        <div class="row">
+            <span>请选择宽(px)：</span>
+            <input type="button" id="w200" value="200" class="normol">
+            <input type="button" id="w300" value="300" class="normol">
+            <input type="button" id="w400" value="400" class="normol">
+        </div>
+        <div class="row">
+            <span>请选择高(px)：</span>
+            <input type="button" id="h200" value="200" class="normol">
+            <input type="button" id="h300" value="300" class="normol">
+            <input type="button" id="h400" value="400" class="normol">
+        </div>
+        <div class="row">
+            <button id="reset" class="btn2">恢复</button>
+            <button id="ok" class="btn2">确认</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

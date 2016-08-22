@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #list {
+            width: 200px;
+            height: 200px;
+            display: none;
+        }
+
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            /*
+             开关按钮
+             利用布尔值来控制
+             * */
+            var oBtn = document.getElementById("btn");
+            var oList = document.getElementById("list");
+            var onOff = 1;
+            oBtn.onclick = function () {
+                if (onOff) {
+                    oList.style.display = "block";
+                    onOff = 0;
+                } else {
+                    oList.style.display = "none";
+                    onOff = 1;
+                }
+            }
+        }
+
+
+    </script>
+
+
+</head>
+<body>
+<input type="button" value="按钮" id="btn">
+<ul id="list">
+    <li>语文</li>
+    <li>语文</li>
+    <li>语文</li>
+    <li>语文</li>
+    <li>语文</li>
+    <li>语文</li>
+</ul>
+</body>
+</html>

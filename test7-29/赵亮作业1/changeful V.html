@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" name='赵亮'>
+    <title>生成V</title>
+    <!--注意观察功能，小方块是从1-5的，即输出5个块，可以用循环构建；
+        每一个图形是通过方块的位置来布局的，使用绝对定位的功能，按照1-5的顺序输出；
+        注意利用数学的思想控制前N个后M个的布局，利用数组的思想存储颜色；通过改变下标调用数组里的数组；
+        通过自增，绑定点击事件，通过清除功能，清除页面内容；
+      -->
+    <style>
+        #div {
+            width: 50px;
+            height: 50px;
+            background: green;
+            float: left;
+            position: absolute; /*利用绝对定位的方法控制行列*/
+            line-height: 50px;
+            text-align: center;
+        }
+
+        #my {
+            position: relative; /*绝对定位的参照位，父级*/
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var oBtn = document.getElementById('btn');
+            var my = document.getElementById("my");
+            var arr = ["red", "orange", "yellow", "green", "blue"];//定义数组，将需要变化的颜色存储于此，可以通过调用下标访问元素；
+            var n = 0;  //全局变量，用于辅助absolute的使用
+            var off = 0;  //  全局变量用于下面开关的的设定，循环播放~~~
+            oBtn.onclick = function () {
+                if (off == 0) {  //判断绑定的点击事件
+                    my.innerHTML = ''; //先清空下内容，以免影响输出叠加；
+                    var str = '';
+                    for (var i = 0; i < 5; i++) { //生成上V，5个方块
+                        if (i < 5 / 2) {
+                            n = i * 50;//i是变量随着循环从1到5   i<5/2即i=0,1,2的时候，n的数值通过循环为 0 50 100 即绝对定位到左边的距离为...
+                        } else {
+                            n = (5 - i - 1) * 50;//后两个   当i=3,4的时候，n分别是50 和  0  通过（5-i-1）*50得到
+                        }//函数的拼接构造，字符串的拼接使用，其中包括行内样式背景色通过下标调用数组内对应的颜色；通过变量，设置top 和left 的值；
+                        str += '<div id="div"style="background:' + arr[i] + ';left:' + Math.floor(i % 5 * 50) + 'px ;top:' + n + 'px">' + (i + 1) + '</div>'
+                    }
+                    my.innerHTML += str;  //输出；
+                    off++;    //自增，便于执行下面一个判断的函数段；
+                }
+                else if (off == 1) {
+                    my.innerHTML = '';
+                    str = '';
+                    for (var i = 0; i < 5; i++) {//生成>
+                        if (i < 5 / 2) {
+                            n = i * 50;//前三个的
+                        } else {
+                            n = (5 - i - 1) * 50;//后两个
+                        }
+                        str += '<div id="div"style="background:' + arr[i] + ';left:' + n + 'px ;top:' + Math.floor(i % 5 * 50) + 'px">' + (i + 1) + '</div>'
+                    }
+                    my.innerHTML += str;
+                    off++;
+                } else if (off == 2) {
+                    my.innerHTML = '';
+                    str = '';
+                    for (var i = 0; i < 5; i++) {//生成<
+                        if (i < 5 / 2) {
+                            n = (5 - i - 3) * 50;//前三个的
+                        } else {
+                            n = (i - 2) * 50;//后两个
+                        }
+                        str += '<div id="div"style="background:' + arr[i] + ';left:' + n + 'px ;top:' + Math.floor(i % 5 * 50) + 'px">' + (i + 1) + '</div>'
+                    }
+                    my.innerHTML += str;
+                    off++;
+                } else {
+                    my.innerHTML = '';
+                    str = '';
+                    for (var i = 0; i < 5; i++) {//生成入
+                        if (i < 5 / 2) {
+                            n = (5 - i - 3) * 50;//前三个的
+                        } else {
+                            n = (i - 2) * 50;//后两个
+                        }
+                        str += '<div id="div"style="background:' + arr[i] + ';left:' + Math.floor(i % 5 * 50) + 'px ;top:' + n + 'px">' + (i + 1) + '</div>'
+                    }
+                    my.innerHTML += str;
+                    off = 0
+                }
+            }
+        };
+
+    </script>
+</head>
+<body>
+<input type="button" value="生成V" id="btn">
+
+<div id="my"></div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var txt = document.getElementById("text");
+            var btn = document.getElementById("btn");
+
+            btn.onclick = function () {
+                var val = txt.value;
+//					console.log(val.length);
+                /*判断去除空格之后字符串的长度是否为0*/
+                if (val.trim().length != 0) {
+                    /*判断数据类型是否是数字*/
+                    if (!isNaN(val)) {
+                        /*判断第一个输入的是不是0*/
+                        if (val[0] != 0) {
+                            /*判断输入的是不是整数*/
+                            if (parseInt(val) == val) {
+                                /*判断输入的长度是否满足要求*/
+                                if (val.length >= 5 && val.length <= 10) {
+                                    alert("输入的数字长度符合要求");
+                                } else {
+                                    alert("数字长度不满足要求");
+                                }
+                            } else {
+                                alert("输入的是小数");
+                            }
+                        } else {
+                            alert("第一个数字不能是0");
+                        }
+                    } else {
+                        console.log("数据类型不是数字");
+                    }
+                } else {
+                    alert("输入为空");
+                }
+
+            }
+        }
+    </script>
+
+
+</head>
+<body>
+<input type="text" id="text">
+<input type="button" id="btn">
+</body>
+</html>

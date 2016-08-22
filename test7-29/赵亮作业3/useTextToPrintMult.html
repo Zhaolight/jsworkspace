@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" name="赵亮">
+    <title></title>
+    <style type="text/css">
+        ul, li, body {
+            padding: 0;
+            margin: 0;
+        }
+
+        #wrap {
+            margin-top: 50px;
+            width: 100% height : 600 px;
+
+        }
+
+        #print {
+            width: 100px;
+            height: 15px;
+        }
+
+        ul {
+            clear: both;
+        }
+
+        li {
+            list-style: none;
+            width: 90px;
+            height: 20px;
+            line-height: 20px;
+            background: red;
+            float: left;
+            text-indent: 10px;
+            border-right: 1px solid #000;
+            border-top: 1px solid #000;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var oBtn = document.getElementById('btn');
+            var oScreen = document.getElementById("screen");
+            var print = document.getElementById("textIn");
+            oBtn.onclick = function () {
+                mult(print.value);//调用打印函数；
+                print.value = "";
+            };
+
+            //构造传参函数，可以输入数字m,然后打印到m行~
+            function mult(n) {
+                var str = '';
+                for (var i = 1; i <= n; i++) {//控制打印到第几行
+                    str += '<ul>';
+                    for (var j = 1; j <= i; j++) {//控制打印到第几列
+                        str += '<li>' + j + '*' + i + '=' + i * j + '</li>';//输出乘法方式；即j*i=ij
+                    }
+                    str += '</ul>';
+                    oScreen.innerHTML = str;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="wrap">
+    <input type="text" id="textIn">
+    <input type="button" value="确定" id="btn">&nbsp输入0-9之间的数字n，打印到第n行的乘法口诀表
+    <div id="screen"></div>
+</div>
+</body>
+</html>

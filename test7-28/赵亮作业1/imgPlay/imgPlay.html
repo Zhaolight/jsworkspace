@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8" name="赵亮">
+    <title>图片轮播</title>
+    <style type="text/css">
+        #box {
+            width: 300px;
+            height: 600px;
+            background: lawngreen;
+            margin: 150px auto;
+            border-radius: 30px;
+            position: relative;
+        }
+
+        #prev {
+            position: absolute;
+            top: 280px;
+            left: -20px;
+        }
+
+        #next {
+            position: absolute;
+            top: 280px;
+            right: -20px;
+        }
+
+        #img {
+            width: 250px;
+            height: 350px;
+            margin: 20px 0;
+        }
+
+        #playScreen {
+            position: absolute;
+            width: 250px;
+            height: 350px;
+            text-align: center;
+            margin: 100px 23px;
+        }
+
+        #choice {
+            position: absolute;
+            top: 30px;
+            width: 300px;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        #page {
+            position: absolute;
+            top: 20px;
+            opacity: 0.5;
+            background: #000;
+            line-height: 30px;
+            width: 250px;
+            text-align: center;
+            color: #ffffff;
+            z-index: 20;
+            font-weight: bold;
+        }
+
+        #tips {
+            position: absolute;
+            bottom: 20px;
+            width: 250px;
+            height: 100px;
+            background: orange;
+            margin: 0 22px;
+            border-radius: 5px;
+        }
+
+        #tips2 {
+            position: absolute;
+            top: 65px;
+            line-height: 50px;
+            width: 300px;
+            height: 50px;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            /*gif页面显示的效果：
+             *1。页面加载完毕后，播放区上方显示文字，图片可以从最后一张跳转到第一张循环播放；
+             *    点击next按钮，图片随着点击向下播放，对应的页码以及描述文字；
+             *    同样，点击prev按钮。图片随着点击向上播放，对应的页码以及描述文字；
+             * 2.点击循环切换，有上述1的所有功能；
+             * 3.点击顺序播放，只能按着指向顺序播放，播放到最后一张的时候停止播放，并且弹出“已经播放到最后一张”
+             * */
+            var tips = document.getElementById("tips");
+            var prev = document.getElementById("prev");
+            var next = document.getElementById("next");
+            var img = document.getElementById("img");
+            var loop = document.getElementById("loop");
+            var order = document.getElementById("order");
+            var page = document.getElementById("page");
+            var tips2 = document.getElementById("tips2");
+            var m = 0;//定位下标，待会需要用于控制数组的下标；
+            var arr = ["images/1.jpg", "images/2.jpg", "images/3.jpg", "images/4.jpg", "images/5.jpg"];//将图片的地址存储于数组，图片切换实际是在调用图片的地址；
+            var arr2 = ["这是我的第一张图片，美丽的山水", "这是我的第二张图片，小桥流水人家", "这是我的第三张图片，这水能喝年", "这是我的第四张图片，我就是这么帅，你来打我呀", "这是我的第五张图片，好吧，我错了，我只是一个程序喵,我要继续敲代码了"];//将提示文字存储于数组，方便对应的图片显示出对应的文字；
+            loop.onclick = loopPlay;                                          //当点击循环的时候，调用有名函数循环播放；
+            order.onclick = orderPlay;                                        //点击顺序播放的时候调用有名函数顺序播放；
+            loopPlay();                                                       //默认情况下的是循环播放，so调用循环播放函数；
+            function loopPlay() {
+                tips2.innerHTML = "图片可以从最后一张跳转到第一张";         //按钮功能的介绍，利用innerHTML输出控制上面的文字；
+                next.onclick = function () {
+                    m++;                                                     //点击前m=0；点击的时候m++了
+                    if (m == arr.length) {                                  //判断，如果播放到最后一张，让m=0；即到第一张；如此不断循环播放；
+                        m = 0;
+                    }
+                    tips.innerHTML = arr2[m];                              //下面的图片提示框显示对应的文字，即图片地址的下标必须等于对应图片的提示文字的下标
+                    page.innerHTML = m + 1 + "/" + arr.length;            //m=0;显示的时候会是0/5 故前面加1同时，m是数字类型的+1后是数字
+                    img.src = arr[m];                                       //切换图片；
+                    return m;                                              //返回m的值，便于回放的时候使用；
+                };
+                prev.onclick = function () {                               //倒序播放；
+                    m--;                                                    //点击前m是上一次点击的时候返回的m值；点击执行之后m++了
+                    if (m == -1) {                                          //判断，如果播放到最后一张，让m=0；即到第一张；如此不断循环播放；
+                        m = 4;
+                    }
+                    img.src = arr[m];                                      //这块的与上面相同；注释略~~
+                    tips.innerHTML = arr2[m];
+                    page.innerHTML = m + 1 + "/" + arr.length
+                };
+            }
+
+            function orderPlay() {
+                tips2.innerHTML = "图片只能到最后一张，或只能到第一张";
+                next.onclick = function () {
+                    m++;
+                    if (m == arr.length) {
+                        /*判断停止条件，即当m到播放的最后一页的下一个的时候；
+                         让他永远等于最后一页的比如数组是5个元素让m=4；调用地址的时候，arr[4]就是第五个元素*/
+                        m = arr.length - 1;
+                        alert('已经是最后一张了');
+                    }
+                    tips.innerHTML = arr2[m];
+                    page.innerHTML = m + 1 + "/" + arr.length;  //此处的注释与上面循环的部分相等，注释略~~
+                    img.src = arr[m];
+                    return m;
+                };
+                prev.onclick = function () {  //与上面注释内容相等，略~~
+                    m--;
+                    if (m == -1) {
+                        m = 0;
+                        alert("这已经是第一张了");
+                    }
+                    img.src = arr[m];
+                    tips.innerHTML = arr2[m];
+                    page.innerHTML = m + 1 + "/" + arr.length
+                };
+            }
+
+        }
+
+    </script>
+
+
+</head>
+<body>
+
+
+<div id="box">
+    <div id="choice">
+        <input type="button" id="loop" value="循环播放"/>
+        <input type="button" id="order" value="顺序播放"/>
+    </div>
+    <span id="tips2">图片可以从最后一张跳转到第一张</span>
+    <a href="javascript:" id="prev"><img src="images/prev.png"></a>
+
+    <div id="playScreen">
+        <div id="page">1/5</div>
+        <img id="img" src="images/1.jpg"></div>
+    <a href="javascript:" id="next"><img src="images/prev.png"></a>
+
+    <div id="tips">这是我的第一张图片，美丽的山水</div>
+
+</div>
+</body>
+</html>

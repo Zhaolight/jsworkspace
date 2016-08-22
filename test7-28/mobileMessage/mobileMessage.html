@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        img, div, input {
+            padding: 0;
+            margin: 0;
+        }
+
+        #mobile {
+            position: relative;
+            margin: 0 auto;
+            width: 367px;
+            height: 590px;
+            background: url("images/mobile.png") no-repeat;
+        }
+
+        #screen {
+            position: absolute;
+            top: 83px;
+            left: 23px;
+            width: 238px;
+            height: 367px;
+            border: 2px solid #000
+        }
+
+        #edit {
+            position: absolute;
+            bottom: 82px;
+            left: 24px;
+            width: 238px;
+            height: 55px;
+            background: lawngreen;
+        }
+
+        img {
+            vertical-align: middle;
+        }
+
+        #player {
+            float: left;
+            width: 43px;
+            height: 43px;
+            text-align: center;
+            line-height: 43px;
+            background: #fff;
+            border-radius: 14px;
+            margin: 5px;
+        }
+
+        #editScreen {
+            width: 125px;
+            height: 44px;
+            margin: 2px;
+            border-radius: 5px;
+        }
+
+        #btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var oScreen = document.getElementById("screen");
+            var oEdit = document.getElementById("edit");
+            var oPlayer = document.getElementById("edit");
+            var oEditScreen = document.getElementById("editScreen");
+            var oBtn = document.getElementById("btn");
+            var oImg = document.getElementById("img");
+            var m = 1;
+            oPlayer.onclick = function () {//角色转变，切换Player的图像
+                if (m) {
+                    oImg.src = "images/1.png";
+                    alert("这是第1个人，要说话1");
+                    m = 0;
+                } else {
+                    oImg.src = "images/2.png";
+                    alert("这是第2个人，要说话2");
+                    m = 1;
+                }
+
+
+            }
+
+
+        }
+    </script>
+</head>
+<body>
+<div id="mobile">
+    <div id="screen">这里是屏幕</div>
+    <div id="edit">
+        <div id="player"><img src="images/1.png" id="img"></div>
+        <input type="text" id="editScreen"/>
+        <input type="button" id="btn" value="发送"/>
+    </div>
+
+
+</div>
+</body>
+</html>

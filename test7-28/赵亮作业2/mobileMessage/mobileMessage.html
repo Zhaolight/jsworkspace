@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        img, div, input, ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        #mobile {
+            position: relative;
+            margin: 0 auto;
+            width: 367px;
+            height: 590px;
+            background: url("images/mobile.png") no-repeat;
+        }
+
+        #screen {
+            position: absolute;
+            top: 83px;
+            left: 23px;
+            width: 238px;
+            height: 367px;
+            border: 2px solid #000;
+            overflow: hidden;
+        }
+
+        #edit {
+            position: absolute;
+            bottom: 82px;
+            left: 24px;
+            width: 238px;
+            height: 55px;
+            background: lawngreen;
+        }
+
+        img {
+            vertical-align: middle;
+        }
+
+        #player {
+            float: left;
+            width: 43px;
+            height: 43px;
+            text-align: center;
+            line-height: 43px;
+            background: #fff;
+            border-radius: 14px;
+            margin: 5px;
+        }
+
+        #editScreen {
+            width: 125px;
+            height: 44px;
+            margin: 2px;
+            border-radius: 5px;
+        }
+
+        #btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+
+        ul {
+            width: 230px;
+            list-style-type: none;
+        }
+
+        .play1 {
+            background: green;
+            border-radius: 5px;
+            margin: 2px;
+            max-width: 200px;
+            word-wrap: break-word; /*自动换行*/
+            float: right; /*文字浮动右浮动，即靠着图片显示*/
+        }
+
+        .play2 {
+            background: orange;
+            border-radius: 5px;
+            margin: 2px;
+            max-width: 200px;
+            word-wrap: break-word; /*自动换行*/
+            float: left; /*文字浮动左浮动，即靠着图片*/
+        }
+
+        #img2 {
+            float: left; /*图片左浮动，即靠着屏幕的左边开始，内容是图片+文字并且文字会挨着图片的位置开始写*/
+        }
+
+        #img1 {
+            float: right; /*图像右浮动，即图片会先显示的话就会靠着屏幕的右边显示，文字会挨着图片显示*/
+        }
+
+        p {
+            clear: both; /*清除浮动，使得元素能够独占一行，使得下一次不受到浮动影响*/
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var oScreen = document.getElementById("screen");
+            var oEdit = document.getElementById("edit");
+            var oEditScreen = document.getElementById("editScreen");
+            var oBtn = document.getElementById("btn");
+            var oImg = document.getElementById("img");
+            var m = 1;  //全局变量，赋值m=1；用于控制开关；
+            oImg.onclick = function () {//角色转变，切换Player的图像
+                if (m) {
+                    oImg.src = "images/1.png"; //如果m是真，显示1的图像，然后让m变成假；
+                    m = 0;
+                } else {
+                    oImg.src = "images/2.png";//如果m是假，显示2的图像，然后让m变成真；
+                    m = 1;
+                }
+            };
+            /*
+             *在显示屏里面添加内容时的格式；
+             *  <p>
+             *     <img src='images/2.png' id='img2'>图片
+             *     <span class='play2'>oEditScreen.value</span>文字
+             *     oScreen.innerHTML（这个是前面输入的东西；写在最后面的意义在于，下一次输入会把这个像下面推移，即最新输入的处于最开的位置）
+             *</p>;
+             */
+            oBtn.onclick = function () {
+                if (m) {
+                    oScreen.innerHTML = "<p><img src='images/2.png' id='img2'>" + "<span class='play2'>" + oEditScreen.value + "</span>" + oScreen.innerHTML + "</p>";
+                    oEditScreen.value = '';//用户用输入框输入一次之后，清除里面的值，便于下次输入
+                } else {
+                    oScreen.innerHTML = "<p><img src='images/1.png' id='img1'><span class='play1'>" + oEditScreen.value + "</span>" + oScreen.innerHTML + "</p>";
+                    oEditScreen.value = '';
+                }
+            }
+
+        }
+    </script>
+</head>
+<body>
+<div id="mobile">
+    <div id="screen"></div>
+    <div id="edit">
+        <div id="player"><img src="images/2.png" id="img"></div>
+        <input type="text" id="editScreen"/>
+        <input type="button" id="btn" value="发送"/>
+    </div>
+
+
+</div>
+</body>
+</html>
