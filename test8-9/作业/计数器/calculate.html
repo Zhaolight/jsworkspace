@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 600px;
+            height: 600px;
+            margin: 50px auto;
+        }
+
+        li {
+            list-style: none;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var p = document.getElementsByTagName("p")[0];
+            var oList = document.getElementById('list');
+            var aLi = oList.getElementsByTagName('li');
+            var sum1 = document.getElementById('sum1');
+            var sum2 = document.getElementById('sum2');
+            var sum3 = document.getElementById('sum3');
+            var m = 0;
+
+            for (var i = 0; i < aLi.length; i++) {
+                count(aLi[i]);//执行函数，即每个li下的，包括计件，计费；
+            }
+            function count(oLi) {
+                //单一商品操作的时候执行计算；包括计件，计费，商品价格信息等；
+                var aBtn = oLi.getElementsByTagName('input');
+                var oStrong = oLi.getElementsByTagName('strong')[0];
+                var oEm = oLi.getElementsByTagName('em')[0];
+                var oSpan = oLi.getElementsByTagName('span')[0];
+                var n1 = 0;
+                aBtn[0].onclick = function () {
+                    n1--;
+                    if (n1 < 0) {
+                        n1 = 0;
+                    }
+                    oStrong.innerHTML = n1;
+                    oSpan.innerHTML = (n1 * parseFloat(oEm.innerHTML)) + '元';
+                    sum();
+                };
+                aBtn[1].onclick = function () {
+                    n1++;
+                    oStrong.innerHTML = n1;
+                    oSpan.innerHTML = (n1 * parseFloat(oEm.innerHTML)) + '元';
+                    sum();
+                };
+            }
+
+            function sum() {//构造求和函数，方便每次信息变更实时监控商品总数；商品的总价格；比较最贵商品；
+                var buyNum = 0;
+                var expensive = 0;
+                var total = 0;
+                for (var i = 0; i < aLi.length; i++) {//获取每种商品的计件，单价，总计；
+                    var strongInner = aLi[i].getElementsByTagName('strong')[0].innerHTML;
+                    var emInner = aLi[i].getElementsByTagName('em')[0].innerHTML;
+                    var spanInner = aLi[i].getElementsByTagName('span')[0].innerHTML;
+                    //算出最贵的；
+                    if (strongInner > 0) {
+                        //选中商品的时候；执行价格比较找最贵；
+                        if (parseFloat(emInner) > expensive) {
+                            expensive = parseFloat(emInner);
+                        }
+                    }
+                    buyNum += parseFloat(strongInner); //每一次的变更都会存储下来；
+                    total += parseFloat(spanInner);   //每一次的变更都会存储下来；
+                }
+                //每次变更都会同步结果；
+                p.innerHTML = '共购买了 <strong>' + buyNum + '</strong> 件商品，单价最贵是：<strong>' + expensive + '</strong>元，合计 <strong>' + total + '</strong> 元；';
+            }
+        }
+
+
+    </script>
+</head>
+<body>
+<div id="box">
+    <ul id="list">
+        <li>
+            <input type="button" value="-"/>
+            <strong>0</strong>
+            <input type="button" value="+"/>
+            单价：<em>12.5元</em>
+            合计：<span>0元</span>
+        </li>
+        <li>
+            <input type="button" value="-"/>
+            <strong>0</strong>
+            <input type="button" value="+"/>
+            单价：<em>10元</em>
+            合计：<span>0元</span>
+        </li>
+        <li>
+            <input type="button" value="-"/>
+            <strong>0</strong>
+            <input type="button" value="+"/>
+            单价：<em>15元</em>
+            合计：<span>0元</span>
+        </li>
+        <li>
+            <input type="button" value="-"/>
+            <strong>0</strong>
+            <input type="button" value="+"/>
+            单价：<em>18元</em>
+            合计：<span>0元</span>
+        </li>
+        <li>
+            <input type="button" value="-"/>
+            <strong>0</strong>
+            <input type="button" value="+"/>
+            单价：<em>20元</em>
+            合计：<span>0元</span>
+        </li>
+        <li>
+            <input type="button" value="-"/>
+            <strong>0</strong>
+            <input type="button" value="+"/>
+            单价：<em>5元</em>
+            合计：<span>0元</span>
+        </li>
+        <li>
+            <input type="button" value="-"/>
+            <strong>0</strong>
+            <input type="button" value="+"/>
+            单价：<em>8元</em>
+            合计：<span>0元</span>
+        </li>
+    </ul>
+    <p>
+        共购买了：0件商品，
+        单价最贵的是：0元
+        合计：0元<br/>
+
+    </p>
+</div>
+</body>
+</html>

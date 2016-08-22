@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .screen {
+            width: 800px;
+            height: 50px;
+            background: lawngreen;
+        }
+    </style>
+</head>
+<body>
+<pre>
+    找出下列数组内的：
+   ['100px', 'abc' - 6, [], -98765, 34, -2, 0, '300',, function (){alert(1);}, null, document, [],
+    true, '200px' - 30, '23.45元', 5, Number('abc'), function (){alert(3);}, 'xyz' - 90]
+
+    /*
+     1、找到arr里所有的数字：-98765, 34, -2, 0, 5
+     2、找到可以转成数字的：'100px', -98765, 34, -2, 0, '300', '23.45元',  5
+     3、把转成数字以后，最大值判断出来：300
+     4、把 NaN 所在的位置找出来：1 14 17  19
+     */
+</pre>
+
+<input type="button" value="所有的数字"/>
+
+<div id="Num" class="screen"></div>
+<br>
+<input type="button" value="可以转数字的"/>
+
+<div id="changeNum" class="screen"></div>
+<br>
+<input type="button" value="所转成数字最大值"/>
+
+<div id="maxNum" class="screen"></div>
+<br>
+<input type="button" value="NaN位置"/>
+
+<div id="pNaN" class="screen"></div>
+<br>
+<input type="button" value="显示所有答案"/>
+<script type="text/javascript">
+    window.onload = function () {
+        var arr = ['100px', 'abc' - 6, [], -98765, 34, -2, 0, '300', , function () {
+            alert(1);
+        }, null, document, [], true, '200px' - 30, '23.45元', 5, Number('abc'), function () {
+            alert(3);
+        }, 'xyz' - 90];
+        var Num = document.getElementById("Num");
+        var changeNum = document.getElementById("changeNum");
+        var maxNum = document.getElementById("maxNum");
+        var pNaN = document.getElementById("pNaN");
+        var oInput = document.getElementsByTagName("input");
+        for (var i = 0; i < oInput.length; i++) {
+            oInput[i].onOFF = true;
+            oInput[i].onOFF = true;
+            oInput[0].onclick = findNum;
+            oInput[1].onclick = canChangeNum;
+            oInput[2].onclick = changAndMaxNum;
+            oInput[3].onclick = pisNaN;
+            oInput[4].onclick = function () {
+                findNum();
+                canChangeNum();
+                changAndMaxNum();
+                pisNaN();
+            }
+        }
+
+        function findNum() {
+            var str = "";
+            for (var i = 0; i < arr.length; i++) {
+                if (typeof arr[i] === "number") {//找到所有的数字,；
+                    if (!isNaN(arr[i])) { //在所有数字类型的基础下排除 去掉NaN的数字；
+                        str += arr[i] + ',';
+                    }
+                }
+            }
+            Num.innerHTML = str;
+        }
+
+        function canChangeNum() {
+            var str = "";
+            for (var i = 0; i < arr.length; i++) {
+                if (parseFloat(arr[i])) { //如果可以转换成数字；就将可转成数字的存起来给str；
+                    str += arr[i] + ',';
+                }
+                if (parseInt(arr[i]) === 0) { //float在转换成数字的时候，0无法转换，所以要加上转换成0的元素；
+                    str += arr[i] + ',';
+                }
+            }
+            changeNum.innerHTML = str;
+        }
+
+        function changAndMaxNum() {
+            var arr2 = [];//创建arr2用于存放转换成的数字
+            for (var i = 0; i < arr.length; i++) {
+                if (parseFloat(arr[i]) || parseInt(arr[i]) == 0) {//找到所有可以转换成数字的，同时把0加上去，这块用的||
+                    arr2.push(parseFloat(arr[i]));
+                }
+            }
+//            console.log(arr2);[100, -98765, 34, -2, 0, 300, 23.45, 5]
+            var max = arr2[0];//先定义一个变量，将数组的第一个元素存进去，然后循环和它比较，直到找出最大的把他存给max，然后输出：
+            for (var j = 0; j < arr2.length; j++) {
+                if (max < arr2[j]) {  // 循环比较过程；
+                    max = arr2[j];
+                }
+            }
+            maxNum.innerHTML = max;//循环结束输出
+        }
+
+        function pisNaN() {
+            var str = "";
+            for (var k = 0; k < arr.length; k++) {
+                if (typeof arr[k] === "number") {
+                    if (isNaN(arr[k])) { //NaN是一种数字类型，同时是NaN的数字类型；
+                        str += k + ',';
+                    }
+                }
+            }
+            pNaN.innerHTML = str;
+        }
+    }
+</script>
+</body>
+</html>

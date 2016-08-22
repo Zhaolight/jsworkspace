@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        div {
+            width: 100px;
+            height: 100px;
+            background: #0000ff;
+            position: absolute;
+            top: 100px;
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var timer = null;
+            var btn = document.getElementsByTagName('input')[0];
+            var div = document.getElementsByTagName('div')[0];
+            btn.onmouseover = function () {
+                setTimeout(function () {
+                    div.style.display = "block"
+                }, 500);
+            };
+            btn.onmouseout = function () {
+                timer = setTimeout(function () {
+                    div.style.display = "none"
+                }, 500)
+            };
+            div.onmouseover = function () {
+                clearTimeout(timer);
+            };
+            div.onmouseout = function () {
+                setTimeout(function () {
+                    div.style.display = "none"
+                }, 500)
+            }
+
+        };
+
+
+    </script>
+</head>
+<body>
+<input type="button" value=" 显示">
+
+<div></div>
+</body>
+</html>

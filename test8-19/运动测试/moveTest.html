@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .move_1 {
+            width: 100px;
+            height: 50px;
+            background-color: #ff0000;
+            position: absolute;
+        }
+
+        .move_2 {
+            width: 100px;
+            height: 50px;
+            background-color: #0000ff;
+            position: absolute;
+        }
+    </style>
+    <script src="move10.js"></script>
+    <script type="text/javascript">
+        var arr = ['linear', 'easeIn', 'easeOut', 'easeBoth', 'easeInStrong', 'easeOutStrong', 'easeBothStrong',
+            'elasticIn', 'elasticOut', 'backIn', 'backOut', 'backBoth', 'bounceIn', 'bounceOut',
+            'bounceBoth'];
+        window.onload = function () {
+            randomMove();
+        };
+        var btn = document.getElementsByTagName('input');
+        function randomMove() {
+            for (var i = 0; i < btn.length; i++) {
+                btn[i].onmouseover = function () {
+                    move(this, {'left': 800}, 1000, arr[parseInt(Math.random() * arr.length)])
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="button" value="匀速" id="move_1" class="move_1" style="left: 120px;top:50px"/>
+<input type="button" value="加速曲线" id="move_2" class="move_1" style="left: 120px;top:100px"/>
+<input type="button" value="减速曲线" id="move_3" class="move_1" style="left: 120px;top:150px"/>
+<input type="button" value="加速减速曲线" id="move_4" class="move_1" style="left: 120px;top:200px"/>
+<input type="button" value="加加速曲线" id="move_5" class="move_1" style="left: 120px;top:250px"/>
+<input type="button" value="减减速曲线" id="move_6" class="move_1" style="left: 120px;top:300px"/>
+<input type="button" value="加加速减减速曲线" id="move_7" class="move_1" style="left: 120px;top:350px"/>
+<input type="button" value="正弦衰减曲线" id="move_8" class="move_1" style="left: 120px;top:400px"/>
+<input type="button" value="加速减速曲线" id="move_9" class="move_1" style="left: 120px;top:450px"/>
+<input type="button" value="加加速曲线" id="move_10" class="move_1" style="left: 120px;top:500px"/>
+<input type="button" value="减减速曲线" id="move_11" class="move_1" style="left: 120px;top:550px"/>
+<input type="button" value="加加速减减速曲线" id="move_12" class="move_1" style="left: 120px;top:600px"/>
+<input type="button" value="正弦衰减曲线" id="move_13" class="move_1" style="left: 120px;top:650px"/>
+<input type="button" value="减减速曲线" id="move_14" class="move_1" style="left: 120px;top:700px"/>
+<input type="button" value="加加速减减速曲线" id="move_15" class="move_1" style="left: 120px;top:750px"/>
+<input type="button" value="加加速减减速曲线" id="move_16" class="move_1" style="left: 120px;top:800px"/>
+<input type="button" value="加加速减减速曲线" id="move_17" class="move_2" style="left: 120px;top:850px"/>
+
+</body>
+</html>

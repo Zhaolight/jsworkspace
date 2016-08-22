@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			/*
+			 	设置时间
+			 * 		setFullYear()     年
+			 * 		setMonth()        月(月份是从0开始)
+			 * 		setDate()         天
+			 * 		setHours()        小时
+			 * 		setMinutes()      分钟
+			 * 		setSeconds()       秒
+			 * 		setMilliSeconds()  毫秒
+			 * 		setTime()         当前时间到1970年1月1日00：00：00的时间差，单位是毫秒
+			 * 		
+			 * */
+			var date = new Date();
+			date.setFullYear(2018);
+			date.setMonth(6);//7月
+			date.setDate(0);//知道本月有多少天，月设置为下个月，日设置为0
+			console.log(date)
+		</script>
+	</body>
+</html>

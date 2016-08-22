@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>延时消失的菜单</title>
+</head>
+<style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    #nav {
+        width: 450px;
+        height: 35px;
+        border: 1px solid #21639c;
+        border-bottom: none;
+        border-radius: 6px;
+        margin: 50px auto;
+        background: url(img/bg.gif);
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    #list {
+        height: 35px;
+    }
+
+    #list li {
+        width: 68px;
+        height: 25px;
+        float: left;
+        font-size: 14px;
+        text-align: center;
+        color: #fff;
+        line-height: 25px;
+        margin-top: 4px;
+        margin-left: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        position: relative;
+    }
+
+    #list li:hover {
+        background: #7b9cc6;
+    }
+
+    span {
+        margin-left: 100px;
+    }
+
+    .ac {
+        background: #7b9cc6;
+    }
+
+    #list2 li {
+        height: 14px;
+        color: #295a94;
+        font-size: 12px;
+        margin-top: 6px;
+        margin-left: 8px;
+        cursor: pointer;
+        padding-right: 8px;
+        border-right: 1px solid #7b5ab5;
+        float: left;
+    }
+
+    #list2 li:hover {
+        text-decoration: underline;
+    }
+
+    #list2 {
+        position: absolute;
+        height: 26px;
+        padding: 0 16px;
+        border-radius: 4px;
+        border: 1px solid #94b5d6;
+        background: url(img/bg2.gif);
+        display: none;
+        top: 100px;
+        left: 0;
+    }
+
+    #list2.show {
+        display: block;
+    }
+</style>
+<script type="text/javascript">
+    window.onload = function () {
+        var arr = [{
+            title: '男装女装',
+            submenu: ['牛仔裤', '毛衣', '针织衫', '衬衣', '皮夹克']
+        }, {
+            title: '箱包配件',
+            submenu: ['拉杆箱', '双肩背', '单肩背', '钱包']
+        }, {
+            title: '美妆洗护',
+            submenu: ['洗发水', '沐浴露', '牙刷', '牙膏', '防晒霜', '爽肤水']
+        }, {
+            title: '运动户外',
+            submenu: ['钓竿', '登山鞋', '篮球', '羽毛球', '山地车']
+        }, {
+            title: '生鲜美食',
+            submenu: ['三文鱼', '北极贝', '烤鸡', '火龙果', '扇贝']
+        }];
+        var pos = ['340px', '430px', '480px', '590px', '670px'];
+
+        eval(function (p, a, c, k, e, d) {
+            e = function (c) {
+                return (c < a ? "" : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36))
+            };
+            if (!''.replace(/^/, String)) {
+                while (c--)d[e(c)] = k[c] || e(c);
+                k = [function (e) {
+                    return d[e]
+                }];
+                e = function () {
+                    return '\\w+'
+                };
+                c = 1;
+            }
+            ;
+            while (c--)if (k[c])p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]);
+            return p;
+        }('1 a=[{3:\'10\',2:[\'D\',\'E\',\'F\',\'C\',\'z\']},{3:\'A\',2:[\'B\',\'G\',\'L\',\'M\']},{3:\'N\',2:[\'K\',\'H\',\'I\',\'J\',\'q\',\'o\']},{3:\'n\',2:[\'p\',\'w\',\'v\',\'x\',\'s\']},{3:\'r\',2:[\'u\',\'t\',\'y\',\'12\',\'Y\']}];1 b=[\'Z\',\'W\',\'X\',\'T\',\'13\'];1 c=8.9(\'11\');1 d=8.9(\'Q\');1 e=\'\';6(1 f=0;f<a.7;f++){e+=\'<4>\'+a[f].3+\'</4>\'};c.l=e;1 g=c.R(\'4\');6(1 f=0;f<g.7;f++){(5(i){g[i].O=5(){h(i);d.P.U=b[i];d.m=\'V\'};g[i].S=5(){d.m=\'\'}})(f)};5 h(i){1 j=\'\';6(1 k=0;k<a[i].2.7;k++){j+=\'<4>\'+a[i].2[k]+\'</4>\'};d.l=j}', 62, 66, '|var|submenu|title|li|function|for|length|document|getElementById||||||||||||innerHTML|className|运动户外|爽肤水|钓竿|防晒霜|生鲜美食|山地车|北极贝|三文鱼|篮球|登山鞋|羽毛球|烤鸡|皮夹克|箱包配件|拉杆箱|衬衣|牛仔裤|毛衣|针织衫|双肩背|沐浴露|牙刷|牙膏|洗发水|单肩背|钱包|美妆洗护|onmouseover|style|list2|getElementsByTagName|onmouseout|590px|left|show|430px|480px|扇贝|340px|男装女装|list|火龙果|670px'.split('|'), 0, {}))
+       console.log(document.getElementById('nav'));
+    }
+</script>
+<body>
+<div id="nav">
+    <ul id="list">
+
+    </ul>
+    <ul class="menu" id="list2"></ul>
+</div>
+</body>
+</html>

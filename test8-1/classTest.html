@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        li {
+            float: left;
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            list-style: none;
+            text-align: center;
+            background: chartreuse;
+            border-right: 1px solid #0000ff;
+        }
+
+    </style>
+</head>
+<body>
+<ul>
+    <li>苹果</li>
+    <li>香蕉</li>
+    <li>栗子</li>
+    <li>西瓜</li>
+    <li>水蜜桃</li>
+    <li>神马鬼</li>
+</ul>
+
+<script type="text/javascript">
+    var oLi = document.getElementsByTagName("li");
+    var len = oLi.length;
+    for (var i = 0; i < len; i++) {
+        oLi[i].onclick = function () {
+            this.style.background = "red"
+        }
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        #box {
+            width: 500px;
+            border: 1px solid black;
+            margin: 50px auto 0;
+            position: relative;
+        }
+
+        img {
+            width: 350px;
+            margin: 10px 75px 20px;
+            height: 290px;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 10px;
+        }
+
+        ul:nth-of-type(1) {
+            left: 5px;
+        }
+
+        ul:nth-of-type(2) {
+            right: 15px;
+        }
+
+        li {
+            list-style: none;
+            width: 50px;
+            height: 30px;
+            margin: 5px 0;
+            border: 1px solid black;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .active {
+            color: white;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li class="active">连衣裙</li>
+        <li>雪纺</li>
+        <li>T恤</li>
+        <li>铅笔裤</li>
+        <li>婚纱</li>
+        <li>T恤</li>
+        <li>铅笔裤</li>
+        <li>婚纱</li>
+    </ul>
+    <ul>
+        <li>包包</li>
+        <li>凉鞋</li>
+        <li>单鞋</li>
+        <li>太阳镜</li>
+        <li>丝袜</li>
+        <li>T恤</li>
+        <li>铅笔裤</li>
+        <li>婚纱</li>
+    </ul>
+    <img src="img/0.jpg" alt="">
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    //eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1;};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p;}('7 a=o.t(\'w\');7 b=o.p(\'v\');7 c=o.p(\'5\')[0];7 d=[\'5/0.6\',\'5/1.6\',\'5/2.6\',\'5/3.6\',\'5/4.6\',\'5/1.6\',\'5/0.6\',\'5/2.6\',\'5/3.6\',\'5/4.6\',\'5/0.6\',\'5/2.6\',\'5/1.6\',\'5/2.6\',\'5/4.6\',\'5/3.6\'];7 e=0,f=u,g=z.y(b.9/2);i();a.m=8(){x(f)};a.s=8(){i()};r(7 h=0;h<b.9;h++){b[h].n=h;b[h].m=8(){r(7 j=0;j<b.9;j++){b[j].q=\'\'};k.q=\'A\';c.F=d[k.n];e=k.n}};8 i(){f=C(8(){l(e<g){e++;l(e==g){e=b.9-1}}G{e--;l(e==g-1){E.D(e);e=0}};b[e].m()},B)}',43,43,'|||||img|jpg|var|function|length|||||||||||this|if|onmouseover|index|document|getElementsByTagName|className|for|onmouseout|getElementById|null|li|box|clearInterval|floor|Math|active|1000|setInterval|log|console|src|else'.split('|'),0,{}))
+    //过程分析；先向下运行；遇到7然后到15然后向上运行；然后到8的时候；往回走到0；
+    /*			7 -> 0
+     0          8
+     *
+     * n++         n--
+     *
+     *  7          15
+     * 8 -> 15
+     * */
+
+    window.onload = function () {
+        var arr = ['img/0.jpg', 'img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg', 'img/1.jpg', 'img/0.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg', 'img/0.jpg', 'img/2.jpg', 'img/1.jpg', 'img/2.jpg', 'img/4.jpg', 'img/3.jpg'];
+        var box = document.getElementById('box');
+        var lis = box.getElementsByTagName('li');
+        var img = box.getElementsByTagName('img')[0];
+        var n = 0;
+        var num = lis.length / 2;
+        var time = null;
+
+        function play(index) {//播放函数；
+            for (var i = 0; i < lis.length; i++) {
+                lis[i].className = '';
+            }
+            lis[index].className = 'active';//播放到第几个，让第几个显示颜色；
+            img.src = arr[index];//同步地址；
+        }
+
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].index = i;//记录播放的第几个；
+            lis[i].onmouseover = function () {
+                play(this.index);
+                n = this.index;//滑动的时候。记录第几个；
+            }
+        }
+        function autoPlay() {
+            time = setInterval(function () {
+                if (n < num) {//自动播放过程；如果在左边的时候；n++即向下播放；
+                    n++;
+                    if (n == num) {//当到达最下边的时候；让它跳到最后一张；
+                        n = lis.length - 1;
+                    }
+                } else {//如果在右边，让他n--即往回播放；
+                    n--;
+                    if (n == num - 1) {//当到达右边最上方的时候；跳到第一个去；
+                        n = 0;
+                    }
+                }
+                play(n);//调用播放函数；
+            }, 1000)
+        }
+
+        autoPlay();//初始化播放函数；
+        //鼠标事件停止自动播放函数；移开继续调用；传进去的是鼠标移开时记录的参数；
+        box.onmouseover = function () {
+            clearInterval(time);
+        };
+        box.onmouseout = function () {
+            autoPlay();
+        };
+    }
+</script>

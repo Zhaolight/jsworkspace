@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<input type="text">
+<input type="button" value="测试整数">
+<script type="text/javascript">
+    window.onload = function () {
+        var oInput = document.getElementsByTagName("input");
+        oInput[1].onclick = function () {
+            var value = oInput[0].value;
+            console.log(value);
+            if (parseInt(value) == parseFloat(value)) {
+                alert(value);
+            } else {
+                alert("这不是整数")
+            }
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <style type="text/css">
+        #box {
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        #box img {
+            width: 100%;
+            height: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 50%;
+            margin-top: -25px;
+            background-color: #ccc;
+            border-radius: 50%;
+            line-height: 50px;
+            text-align: center;
+            color: white;
+            font-size: 40px;
+        }
+
+        #prev {
+            left: 20px;
+        }
+
+        #next {
+            right: 20px;
+        }
+
+        #list {
+            padding: 0;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            margin-left: -75px;
+            width: 150px;
+        }
+
+        #list li {
+            list-style: none;
+            background-color: yellow;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            float: left;
+            margin: 0 5px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        #list li.active {
+            background-color: #ccc;
+        }
+
+        #list li img {
+            display: none;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            margin-left: -50px;
+        }
+
+        #list li div {
+            border: 10px solid transparent;
+            border-top-color: #ccc;
+            position: absolute;
+            top: -10px;
+            display: none;
+        }
+
+        #list li.active div, #list li.active img {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="box">
+    <img src="img/0.jpg" alt="" id="img">
+    <a href="javascript:;" id="prev"><</a>
+    <a href="javascript:;" id="next">></a>
+    <ul id="list">
+        <li style="background:red;"><img src="img/0.jpg" alt=""><div></div></li>
+        <li><img src="img/1.jpg" alt=""><div></div></li>
+        <li><img src="img/2.jpg" alt=""><div></div></li>
+        <li><img src="img/3.jpg" alt=""><div></div></li>
+        <li><img src="img/4.jpg" alt=""><div></div></li>
+    </ul>
+</div>
+
+<p style="text-align: center;">文字描述</p>
+</body>
+</html>
+<script type="text/javascript">
+    var prev = document.getElementById('prev');
+    var next = document.getElementById('next');
+    var oImg = document.getElementById('img');
+    var aLi = document.getElementsByTagName('li');
+    var imgs = ['img/0.jpg', 'img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg'];
+    var num = 0;
+    var n = 0;
+    next.onclick = function () {
+        num++;
+        if (num > imgs.length - 1) {
+            num = 0;
+        }
+        change();
+    };
+    prev.onclick = function () {
+        num--;
+        if (num < 0) {
+            num = imgs.length - 1;
+        }
+        change();
+    };
+
+    for (var i = 0; i < aLi.length; i++) {
+        aLi[i].index = i;//设置li的索引值用于后面的点击和鼠标滑入事件
+        aLi[i].onmouseover = function () {
+            this.getElementsByTagName("img")[0].style.display="block";//获取索引图片，以及小三角，使其显示
+            this.getElementsByTagName("div")[0].style.display="block";//获取索引图片，以及小三角，使其显示
+        };
+        aLi[i].onmouseout = function () {
+            this.getElementsByTagName("img")[0].style.display="none";//获取索引图片，以及小三角，使其隐藏
+            this.getElementsByTagName("div")[0].style.display="none";//获取索引图片，以及小三角，使其隐藏
+        };
+        aLi[i].onclick = function () {
+            oImg.src = imgs[this.index];//改变当前点击图片
+            aLi[n].style.background = '';//去除上一个点击的li的背景色
+            this.style.background = 'red';//点击当前li的时候让其背景色改变
+            num = n = this.index;  //保存当前的索引值，以便在下次清除时使用。
+        };
+        function change() {
+            oImg.src = imgs[num];//图片替换成当前的
+            aLi[n].style.background = ''; //清除上一个，添加当前的。
+            aLi[num].style.background = 'red';      //添加当前的为焦点。
+            n = num;   //保持当前的位置。
+        }
+    }
+</script>

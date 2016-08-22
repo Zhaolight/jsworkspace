@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            margin: 100px auto 0;
+            width: 520px;
+            height: 280px;
+            border: 1px solid #000000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #list {
+            list-style: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        li {
+            float: left;
+        }
+
+        img {
+            display: block;
+        }
+
+        #prev, #next {
+            position: absolute;
+            width: 30px;
+            height: 60px;
+            background: #000000;
+            color: white;
+            font-weight: bold;
+            font-size: 30px;
+            line-height: 60px;
+            text-align: center;
+            top: 110px;
+            cursor: pointer;
+        }
+
+        #prev {
+            left: 0;
+        }
+
+        #next {
+            right: 0;
+        }
+
+        #text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            height: 50px;
+            background: rgba(0, 0, 0, .8);
+            color: white;
+        }
+
+    </style>
+    <script src="move.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var box = document.getElementById('box');
+            var ul = document.getElementById('list');
+            var lis = ul.getElementsByTagName('li');
+            var loop = box.getElementsByTagName('span');
+            var text = document.getElementById('text');
+            var arr = ['<h3>标题一</h3><p>内容一</p>', '<h3>标题二</h3><p>内容二</p>', '<h3>标题三</h3><p>内容三</p>', '<h3>标题四</h3><p>内容四</p>', '<h3>标题五</h3><p>内容五</p>'];
+            ul.style.width = 520 * lis.length + 'px';
+            var time = null;
+            var n = 0;
+            loop[0].onclick = function () {
+                clearInterval(time);
+                n = parseInt(parseFloat(getComputedStyle(ul)['left']) / 520);
+                n = (n < 0) ? -n : n;
+                play2();
+            };
+            loop[1].onclick = function () {
+                clearInterval(time);
+                n = parseInt(parseFloat(getComputedStyle(ul)['left']) / 520);
+                n = (n < 0) ? -n : n;
+                play();
+            };
+            ul.onmouseover = function () {
+                clearInterval(time)
+            };
+            ul.onmouseout = function () {
+//                n = parseInt(parseFloat(getComputedStyle(ul)['left']) / 520);
+//                n = (n < 0) ? -n : n;
+//                console.log(n);
+                autoPlay();
+            };
+            function play() {
+                n++;
+                if (n > lis.length - 1) {
+                    n = 0;
+                }
+                move(text, {'top': 300}, 800, 'linear', function () {
+                    move(ul, {left: -n * 520}, 800, 'linear', function () {
+                        move(text, {'top': 210}, 800, 'linear');
+                        text.innerHTML = arr[n];
+                    });
+                });
+            }
+
+            function play2() {
+                n--;
+                if (n < 0) {
+                    n = lis.length - 1;
+                }
+                move(text, {'top': 300}, 800, 'linear', function () {
+                    move(ul, {left: -n * 520}, 800, 'linear', function () {
+                        move(text, {'top': 210}, 800, 'linear');
+                        text.innerHTML = arr[n];
+                    });
+                });
+            }
+
+            function autoPlay() {
+                clearInterval(time);
+                time = setInterval(function () {
+                    play();
+                }, 3000);
+            }
+            autoPlay();
+        }
+    </script>
+</head>
+<body>
+<div id="box">
+    <ul id="list">
+        <li><img src="images1/1.jpg"></li>
+        <li><img src="images1/2.jpg"></li>
+        <li><img src="images1/3.jpg"></li>
+        <li><img src="images1/4.jpg"></li>
+        <li><img src="images1/5.jpg"></li>
+    </ul>
+    <span id="prev"> < </span>
+    <span id="next"> > </span>
+
+    <div id="text">
+        <h3>标题一</h3>
+
+        <p>内容一</p>
+    </div>
+</div>
+</body>
+</html>

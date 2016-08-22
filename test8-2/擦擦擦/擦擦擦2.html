@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        body, div {
+            padding: 0;
+            margin: 0;
+        }
+
+        div {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            background-color: #ccc;
+        }
+
+        #box {
+            width: 500px;
+            height: 500px;
+            background: url(images/88.jpg);
+            position: relative;
+        }
+
+        .active {
+            background-image: url(images/3.jpg);
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+
+</body>
+</html>
+<script type="text/javascript">
+    window.onload = function () {
+        var box = document.getElementById("box");
+        var str = "";
+
+        function printDiv() {
+            for (var i = 0; i < 100; i++) {
+                str += '<div   style="left:' + (i % 10) * 50 + 'px; top:' + Math.floor(i / 10) * 50 + 'px"></div>';
+            }
+            box.innerHTML = str;
+        }
+        printDiv();
+        var oDiv = box.getElementsByTagName("div");
+        for (var j = 0; j < oDiv.length; j++) {
+            oDiv[j].onmouseover = function () {
+                this.style.background = "none";
+            }
+        }
+    }
+</script>

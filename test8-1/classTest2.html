@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #box {
+            width: 800px;
+            height: 300px;
+            margin: 50px auto;
+        }
+
+        .active {
+            background: #ff0000;
+        }
+
+        p.over {
+            display: none;
+        }
+
+        p.out {
+            display: block;
+            width: 200px;
+            height: 200px;
+            background: orange;
+        }
+
+    </style>
+
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var btn = document.getElementsByTagName("input");
+            var tips = document.getElementsByTagName("p");
+            for (var i = 0; i < btn.length; i++) {
+                btn[i].mark = i; //第几个对应的数字i
+                btn[i].onmouseover = function () {//清空所有的样式
+                    for (var i = 0; i < btn.length; i++) {
+                        btn[i].className = "";//清空选择框的样式
+                        tips[i].className = "over";  //设定所有显示的内容框为隐藏
+                    }
+                    this.className = "active"; //点击后，点击对应的选项框变色
+                    tips[this.mark].className = "out";   //让对应内容显示
+                }
+
+            }
+
+        }
+
+    </script>
+
+</head>
+<body>
+<div id="box">
+    <input type="button" name="button" value="按钮1" class="active">
+    <input type="button" name="button" value="按钮2">
+    <input type="button" name="button" value="按钮3">
+    <input type="button" name="button" value="按钮4">
+    <input type="button" name="button" value="按钮5">
+
+    <p class="out">内容1</p>
+
+    <p class="over">内容2</p>
+
+    <p class="over">内容3</p>
+
+    <p class="over">内容4</p>
+
+    <p class="over">内容5</p>
+</div>
+
+</body>
+</html>

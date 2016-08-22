@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>my</title>
+    <style>
+        ul, p {
+            width: 300px;
+            padding: 0;
+            margin: 0 auto;
+        }
+
+        p {
+            padding-top: 20px;
+        }
+
+        li {
+            list-style: none;
+            border-bottom: 1px solid #333;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .hover {
+            background-color: black;
+            color: #fff;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<ul>
+    <li><input type="checkbox"/>信乐团 - 海阔天空</li>
+    <li><input type="checkbox"/>五月天 - 倔强</li>
+    <li><input type="checkbox"/>薛之谦 - 演员</li>
+    <li><input type="checkbox"/>杨宗纬 - 一次就好</li>
+    <li><input type="checkbox"/>周杰伦 - 安静</li>
+    <li><input type="checkbox"/>周杰伦 - 稻香</li>
+    <li><input type="checkbox"/>周杰伦 - 听老师的话</li>
+
+</ul>
+<p><input type="checkbox" id="all"/> 全选</p>
+
+<script type="text/javascript">
+    window.onload = function () {
+        var num = 0;
+        var Lis = document.getElementsByTagName("li");
+        var all = document.getElementById("all");
+        var oUL = document.getElementsByTagName("ul")[0];
+        var Inputs = oUL.getElementsByTagName("input");
+        for (var i = 0; i < Lis.length; i++) {//初始化页面；
+            begin(i);
+        }
+        function begin(n) {//初始化页面函数；
+            if (i % 2 == 0) {
+                Lis[n].className = "red";
+                hoverSingle(n);
+            } else {
+                Lis[n].className = "yellow";
+                hoverPair(n);
+            }
+            if (Inputs[n].checked = false) {
+                all.checked = false;
+            }
+        }
+
+        function hoverSingle(n) {
+            Lis[n].onmouseover = function () {
+                this.className = "hover";
+            };
+            Lis[n].onmouseout = function () {
+                this.className = "red";
+            }
+        }
+
+        function hoverPair(n) {
+            Lis[n].onmouseover = function () {
+                this.className = "hover";
+            };
+            Lis[n].onmouseout = function () {
+                this.className = "yellow";
+            }
+        }
+
+        all.onclick = function () {//全选事件；
+            for (var i = 0; i < Inputs.length; i++) {
+                if (this.checked) {
+                    Inputs[i].checked = "checked";
+                    Lis[i].style.background = "green";
+                } else {
+                    Lis[i].style.background = "";
+                    Inputs[i].checked = false;
+                }
+            }
+        };
+
+        var CheckAll = function () {//选项状态监听函数；
+            for (var i = 0, n = 0; i < Inputs.length; i++) {
+                Inputs[i].checked && n++;
+            }
+            all.checked = (n == Inputs.length);//all按钮的事件监听；
+        };
+        for (var i = 0; i < Inputs.length; i++) {//单个点击事件；
+            Inputs[i].index = i;
+            Inputs[i].onclick = function () {
+                if (this.checked) {
+                    Lis[this.index].style.background = "green";
+                } else {
+                    Lis[this.index].style.background = "";
+                }
+                CheckAll()//每个按钮的点击都有可能影响到最后按钮的选中状态，调用监听函数；
+            }
+        }
+    };
+
+
+</script>
+</body>
+</html>

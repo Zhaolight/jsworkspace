@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    /*
+     * 1、有没有输入
+     * 2、输入的是不是数字
+     * 3、不能有0在前面
+     * 4、不能是小数
+     * 5、输入的数字必须在5位以上、10位以内
+     */
+    window.onload = function () {
+        var btn = document.getElementById("btn");
+        var aInput = document.getElementsByTagName("input");
+        btn.onclick = function testQQNum() {
+            var value = aInput[0].value;
+            switch (true) {
+                case !value:
+                    alert("你木有输入呀！！");
+                    break;
+                case isNaN(parseInt(value)):
+                    alert("你输入的不是数字呀！！！");
+                    break;
+                case value[0] === 0:
+                    alert("你见过第一位是0的QQ！！你瞎呢？");
+                    break;
+                case (String(parseInt(value)).length != value.length):
+                    alert("你咋还输入小数呢？");
+                    break;
+                case !(5 < value.length && value.length < 10):
+                    alert("亲，你输入的QQ必须在5位以上、10位以内的哟！！！");
+                    break;
+                default:
+                    alert("我靠，你居然输入正确的啊！" + value);
+                    break;
+                /*
+                 *
+                 *这块可以加入语句，执行让登录界面跳转到QQ菜单界面，即，自身消失，然后QQ主页面显示；
+                 * 对应的分组可以自定义属性或者开关控制，然后滑动到个人的QQ后会有颜色变化，点击后，
+                 * 跳转到QQ聊天的界面；
+                 *
+                 **/
+            }
+            aInput[0].value = "";
+        }
+    }
+</script>
+请输入QQ号码:
+<input type="text" id="text"/>
+<input type="button" id="btn" value="验证"/>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

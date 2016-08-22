@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body, ul, li, p {
+            padding: 0;
+            margin: 0;
+        }
+
+        .active {
+            color: blue;
+        }
+
+        .active1 {
+            color: green;
+        }
+
+        .active2 {
+            color: yellow;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 50px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var As = document.getElementsByTagName("a");
+            for (var i = 0; i < As.length; i++) {
+                var cn = -1;
+                As[i].index = i;
+                As[i].on = true;
+                As[i].onmouseover = function () {
+                    for (var j = 0; j < As.length; j++) {
+                        As[j].className = "active";//清除所有的状态，改为原本的背景图
+                    }
+                    for (var i = 0; i <= this.index; i++) {  //匹配对应的状态，即鼠标滑过到哪里，之前所有的背景都对应的改变；
+                        if (this.index < 2) {
+                           As[i].className = "active1"
+                        } else if(this.index<5){
+                            As[i].className = "active2"
+                        } else
+                        {  As[i].className = "active3"
+                        }
+                    }
+                };
+
+                As[i].onmouseout = function () {
+                    for (var i = 0; i <= this.index; i++) {  //当鼠标移出的时候；
+                        As[i].className = 'active';       //先清除所有的背景；
+                    }
+                    for (var i = 0; i <= cn; i++) {
+                        /*As[i].className = "active1";*/
+                        if (cn > 1) {
+                            As[i].className = "active2"
+                        }
+                    }
+                };
+                As[i].onclick = function () {
+                    cn = this.index;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<p><a href="javascript:;">★</a>
+    <a href="javascript:;">★</a>
+    <a href="javascript:;">★</a>
+    <a href="javascript:;">★</a>
+    <a href="javascript:;">★</a>
+</p>
+</div>
+</body>
+</html>

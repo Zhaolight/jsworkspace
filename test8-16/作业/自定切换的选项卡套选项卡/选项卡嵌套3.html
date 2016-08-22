@@ -1,0 +1,224 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <style type="text/css">
+        li {
+            list-style: none;
+            cursor: pointer;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            border: 5px solid #E7E7E7;
+            height: 400px;
+            width: 800px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        #box > ul {
+            width: 100px;
+            height: 100%;
+            float: left;
+        }
+
+        #box > ul li {
+            line-height: 99px;
+            text-align: center;
+            background-color: #000;
+            border-bottom: 1px solid #E7E7E7;
+            color: white;
+        }
+
+        #box > ul .active {
+            background-color: red;
+            color: black;
+        }
+
+        #box div {
+            float: left;
+            width: 700px;
+            height: 100%;
+            position: relative;
+            display: none;
+        }
+
+        #box img {
+            width: 100%;
+            height: 100%;
+        }
+
+        #box div ul {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        #box div li {
+            float: left;
+            border-right: 1px solid white;
+            background-color: black;
+            opacity: .7;
+            line-height: 30px;
+            margin-right: -1px;
+            color: white;
+            text-align: center;
+        }
+
+        #box div .active {
+            background-color: #EF3163;
+        }
+
+        .div1 li, .div3 li {
+            width: 175px;
+        }
+
+        .div2 li, .div4 li {
+            width: 350px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="box">
+    <ul>
+        <li>暖色调</li>
+        <li>金色夕阳</li>
+        <li>灰色格调</li>
+        <li>baby</li>
+    </ul>
+    <div class="div1">
+        <img src="images/img1.gif" alt=""/>
+        <ul>
+            <li>暖色键盘</li>
+            <li>惬意时光</li>
+            <li>午后</li>
+            <li>一杯苦咖啡</li>
+        </ul>
+    </div>
+    <div class="div2">
+        <img src="images/img5.gif" alt=""/>
+        <ul>
+            <li>街边夕阳</li>
+            <li>金色稻草</li>
+        </ul>
+    </div>
+    <div class="div3">
+        <img src="images/img7.gif" alt=""/>
+        <ul>
+            <li>灰色通讯</li>
+            <li>咖啡'配'饼干</li>
+            <li>孤单键盘</li>
+            <li>枯树</li>
+        </ul>
+    </div>
+    <div class="div4">
+        <img src="images/img11.gif" alt=""/>
+        <ul>
+            <li>baby素材一</li>
+            <li>baby素材二</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    window.onload = function () {
+        var arr = [
+            ["暖色调", ["暖色键盘", "惬意时光", "午后", "一杯苦咖啡"], ["images/img1.gif", "images/img2.gif", "images/img3.gif", "images/img4.gif"]],
+
+            ["金色夕阳", ["街边夕阳", "金色稻草"], ["images/img5.gif", "images/img6.gif"]],
+
+            ["灰色格调", ["灰色通讯", "咖啡'配'饼干", "孤单键盘", "枯树"], ["images/img7.gif", "images/img8.gif", "images/img9.gif", "images/img10.gif"]],
+
+            ["baby", ["baby素材一", "baby素材二"], ["images/img11.gif", "images/img12.gif"]]
+        ];
+        var box = document.getElementById('box');
+        var oUL = document.getElementById("box").getElementsByTagName('ul')[0];
+        var ALi = oUL.getElementsByTagName('li');
+        var divs = box.getElementsByTagName('div');
+        var h = 0;
+        var w = 0;
+        var time = null;
+        //初始化过程,页面加载出现图片；
+        divs[0].style.display = 'block';
+        divs[0].getElementsByTagName('img')[0].src = arr[0][2][0];
+        divs[0].getElementsByTagName('li')[0].className = 'active';
+        ALi[0].className = "active";
+        for (var i = 0; i < ALi.length; i++) {
+            play(i);
+        }
+        function play(n) {//点击及hover事件参数函数；
+            var Lis = divs[n].getElementsByTagName('li');
+            var Img = divs[n].getElementsByTagName('img')[0];
+            ALi[n].onclick = function () {
+                for (var i = 0; i < divs.length; i++) {//点击的时候；传入n即第几个div；让其他的都隐藏让点击的当前的显示；
+                    divs[i].style.display = "none";
+                    ALi[i].className = '';
+                }
+                for (var k = 0; k < Lis.length; k++) {//清除所有的子选项卡的li的颜色；
+                    Lis[k].className = '';
+                }
+                this.className = "active";//让点击的当前的那个添加hover效果；
+                divs[n].style.display = 'block';
+                Lis[0].className = 'active';
+                h = n;//记录点击的时候的播放显示的第几个div；
+                w = 0;//每次点击，右边图片都会从第一个地方播放；
+            };
+            for (var i = 0; i < Lis.length; i++) {//hover效果的函数
+                Lis[i].index = i;
+                Lis[i].onmouseover = function () {
+                    for (var i = 0; i < Lis.length; i++) {
+                        Lis[i].className = '';
+                    }
+                    this.className = 'active';
+                    Img.src = arr[n][2][this.index];//更改对应的图片路径地址；显示图片；
+                    w = this.index;//鼠标事件改变的时候记录当前的位置；鼠标移出的时候继续此位置播放；
+                }
+            }
+        }
+
+        //开启定时器，实现轮播效果；
+        function autoPlay() {
+            time = setInterval(function () {
+                w++;//控制右边的li选项的向右运行；
+                if (w == arr[h][1].length) {//如果运行到最右边的时候；h++即；向下左边的li向下运动；让w=0；方便下次运动；
+                    h++;
+                    if (h == ALi.length) {//如果左边的li运动到最下边的时候；让其变成0；即又循环到0了继续走你~~
+                        h = 0;
+                    }
+                    w = 0;
+                }
+                var img = divs[h].getElementsByTagName('img')[0];//在当前div下获取img
+                var lis = divs[h].getElementsByTagName('li');//在当前div下获取li即当前页面下的右边的li；
+                for (var i = 0; i < ALi.length; i++) {//大清空；
+                    ALi[i].className = "";
+                    divs[i].style.display = 'none';
+                }
+                ALi[h].className = 'active';//当前行变色；即左边的当前选中的，变色
+                divs[h].style.display = 'block';//当前div显示出来；
+
+                for (var i = 0; i < lis.length; i++) {//大清空右边的li
+                    lis[i].className = '';
+                }
+                lis[w].className = 'active';//让右边的显示对应的颜色及img.src;
+                img.src = arr[h][2][w];
+            }, 1000);
+        }
+
+        autoPlay();
+        box.onmouseover = function () {
+            clearInterval(time);
+        };
+        box.onmouseout = function () {
+            autoPlay();
+        };
+    }
+
+</script>

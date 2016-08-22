@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    #div1 {
+        width: 210px;
+        border: 1px solid #000;
+        position: relative;
+        margin: 40px auto;
+    }
+
+    #prev {
+        position: absolute;
+        left: 0;
+        top: 2px;
+    }
+
+    #next {
+        position: absolute;
+        right: 0;
+        top: 2px;
+    }
+
+    #oSpan {
+        display: inline-block;
+        text-align: center;
+        width: 100%;
+        color: blueviolet;
+    }
+
+    ol {
+        overflow: hidden;
+        border-bottom: 1px solid #ccc;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    ol li {
+        float: left;
+        padding: 7px;
+        /*border-left:1px solid #000;*/
+    }
+
+    ul {
+        overflow: hidden;
+    }
+
+    #oul li {
+        width: 30px;
+        height: 30px;
+        float: left;
+        text-align: center;
+        line-height: 30px;
+
+    }
+
+    .red {
+        color: red;
+    }
+
+    .gray {
+        color: gray;
+    }
+
+    li.active {
+        border: 1px solid blue;
+        box-sizing: border-box;
+    }
+
+</style>
+<body>
+<div id="div1">
+    <a href="javascript:" id="prev">←</a>
+    <span id="oSpan">xxxx年xx月</span>
+    <a href="javascript:" id="next">→</a>
+    <ol>
+        <li class="red">日</li>
+        <li>一</li>
+        <li>二</li>
+        <li>三</li>
+        <li>四</li>
+        <li>五</li>
+        <li class="red">六</li>
+    </ol>
+    <ul id="oul"></ul>
+</div>
+</body>
+<script type="text/javascript">
+    /*
+     1.知道当前月第一天是星期几
+     2.知道当前月有几天
+     3.知道今天是几号
+     *
+     * */
+
+    var prev = document.getElementById('prev');
+    var next = document.getElementById('next');
+    var oSpan = document.getElementById('oSpan');
+    var oUL = document.getElementById('oul');
+    var n = 0;
+    prev.onclick = function () {
+        n--;//上个月；
+        show();
+    };
+    next.onclick = function () {
+        n++;//下个月；
+        show();
+    };
+    show();
+    function show() {
+        /*1.知道当前月第一天是星期几*/
+        oUL.innerHTML = '';//每次更换月份的时候需要清空；
+        var date = new Date();
+        date.setMonth(date.getMonth() + n);//将时间设置成本月；
+        date.setDate(1);//再将时间设置成本月的第一天。
+        var n1 = date.getDay();//var n1存放第一天是星期几；
+        n1--;//让其自减；即之前的日期设置为空的li；
+        oSpan.innerHTML = date.getFullYear() + '年' + (date.getMonth() + 1) + '月';//初始化年、月；
+        var str = '';
+        for (var i = 0; i < n1; i++) {
+            str += '<li></li>';
+        }
+        /*2.知道当前月有几天 */
+
+        var date = new Date();
+        date.setMonth(date.getMonth() + n);//获取"当前"月；;
+        date.setMonth(date.getMonth() + 1);//将月份设置为“下一个月”；
+        date.setDate(0);//将日期设置为0就会自动跳到“当前月”最后一天；
+        var n2 = date.getDate();//计算“本月”有多少天！
+//        console.log(n2);
+        for (var k = 0; k < n2; k++) {//填日期；从i+1开始；
+            str += '<li>' + (k + 1) + '</li>'
+        }
+        oUL.innerHTML = str;
+        //逢周末变红；
+        var lis = oUL.getElementsByTagName('li');
+        for (var i = 0; i < lis.length; i++) {
+            if (i % 7 == 0 || i % 7 == 6) {
+                lis[i].className = 'red'
+            }
+        }
+        /*3.知道今天是几号*/
+        var date = new Date();
+        date.setMonth(date.getMonth() + n);
+        var n3 = date.getDate();
+//        console.log(n3)
+        /*今天之前的都是过去的是灰色的！*/
+        if (n < 0) {
+            for (var i = 0; i < lis.length; i++) {
+                lis[i].className = 'gray'
+            }
+        } else if (n == 0) {
+            for (var i = 0; i < lis.length; i++) {
+                if (lis[i].innerHTML < n3) {
+                    lis[i].className = 'gray';
+                } else if (lis[i].innerHTML == n3) {
+                    lis[i].className += ' active';//注意这里加状态的时候，是+=即在原来的状态的基础上加的样式；要用空格+样式；
+                }
+            }
+        }
+    }
+</script>
+</html>

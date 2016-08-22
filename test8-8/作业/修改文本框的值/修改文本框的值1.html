@@ -1,0 +1,156 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <style type="text/css">
+        body {
+            line-height: 20px;
+        }
+
+        .title {
+            line-height: 25px;
+            text-indent: 2em;
+            font-weight: bold;
+            color: white;
+            font-size: 16px;
+            background-color: #6BA542;
+            width: 300px;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        #list {
+            margin: 0;
+            padding: 0;
+            width: 300px;
+        }
+
+        li {
+            list-style: none;
+            border-bottom: 2px solid #26D9C7;
+        }
+
+        img {
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+            color: #429400;
+        }
+
+        #list p {
+            display: inline;
+        }
+
+        #list div {
+            display: none
+        }
+
+        #list .show {
+            display: block;
+        }
+
+    </style>
+</head>
+
+<body>
+<p class="title">分类名称</p>
+<ul id="list">
+    <li>
+        <div class="show">
+            <p>妙味远程课堂</p>
+            <img src="images/pen.png" alt="点击编辑" title="点击编辑">
+        </div>
+        <div>
+            <input type="text" name="">
+            <a href="javascript:;">确定</a>
+            <a href="javascript:;">取消</a>
+        </div>
+    </li>
+    <li>
+        <div class="show">
+            <p>妙味远程课堂</p>
+            <img src="images/pen.png" alt="点击编辑" title="点击编辑">
+        </div>
+        <div>
+            <input type="text" name="">
+            <a href="javascript:;">确定</a>
+            <a href="javascript:;">取消</a>
+        </div>
+    </li>
+    <li>
+        <div class="show">
+            <p>妙味远程课堂</p>
+            <img src="images/pen.png" alt="点击编辑" title="点击编辑">
+        </div>
+        <div>
+            <input type="text" name="">
+            <a href="javascript:;">确定</a>
+            <a href="javascript:;">取消</a>
+        </div>
+    </li>
+    <li>
+        <div class="show">
+            <p>妙味远程课堂</p>
+            <img src="images/pen.png" alt="点击编辑" title="点击编辑">
+        </div>
+        <div>
+            <input type="text" name="">
+            <a href="javascript:;">确定</a>
+            <a href="javascript:;">取消</a>
+        </div>
+    </li>
+</ul>
+<script type="text/javascript">
+    window.onload = function () {
+        var oList = document.getElementById("list");
+        var aLi = document.getElementsByTagName("li");
+        for (var i = 0; i < aLi.length; i++) {
+            change(i);//每一行都是一样的功能，so传参的干活！！！
+        }
+        function change(n) {//获取到各种鼠标要点的，滑的，改变的，对象。
+            var show = aLi[n].getElementsByClassName("show")[0];
+            var divs = aLi[n].getElementsByTagName('div');
+            var ps = show.getElementsByTagName("p")[0];
+            var oImg = show.getElementsByTagName("img")[0];
+            var oDiv = aLi[n].getElementsByTagName("div")[1];
+            var oInput = oDiv.getElementsByTagName("input")[0];
+            var sure = oDiv.getElementsByTagName("a")[0];
+            var reset = oDiv.getElementsByTagName("a")[1];
+            oImg.onclick = function () {//显示更改框，并让更改匡获得与之前一样的值；
+                divs[0].className = '';
+                oDiv.style.display = "block";
+                oInput.value = ps.innerHTML;
+            };
+            sure.onclick = function () {//构造确定点击事件；
+                divs[0].className = 'show';
+                oDiv.style.display = "none";
+                ps.innerHTML = oInput.value;
+            };
+            reset.onclick = function () { //构造取消点击事件；
+                divs[0].className = 'show';
+                oDiv.style.display = "none";
+            };
+            function hover(obj) {//构造传参鼠标滑动事件；
+                obj.onmouseover = function () {
+                    this.style.background = "orange"
+                };
+                obj.onmouseout = function () {
+                    this.style.cssText = '';
+                };
+            }
+
+            hover(sure); //传参过程；
+            hover(reset);//传参过程；
+        }
+    }
+
+</script>
+</body>
+</html>

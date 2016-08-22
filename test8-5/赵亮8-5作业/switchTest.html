@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        div, p, span, body, a {
+            padding: 0;
+            margin: 0;
+        }
+
+        #wrap {
+            width: 100%;
+            height: 920px;
+            position: relative;
+        }
+
+        body {
+            width: 100%;
+            height: 100%;
+            background: url(images/skin_1.jpg) no-repeat 0 -50px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        #QQBox {
+            display: none;
+            width: 540px;
+            height: 416px;
+            position: absolute;
+            top: 200px;
+            left: 500px;
+            background: #fcfcfc;
+            border-right: 10px;
+        }
+
+        .top {
+            width: 540px;
+            height: 232px;
+            background: url("images/QQbg_01.jpg") no-repeat;
+        }
+
+        .down {
+            width: 540px;
+            height: 184px;
+            position: relative;;
+        }
+
+        #text {
+            width: 242px;
+            height: 35PX;
+            border-radius: 5px;
+            position: absolute;
+            left: 166px;
+            bottom: 132px;
+            outline-style: none;
+            text-indent: 20px;
+            font-size: 16px;
+            background: #ffffff;
+            border: 1px solid #808080;
+        }
+
+        #btn {
+            width: 242px;
+            height: 35PX;
+            position: absolute;
+            left: 170px;
+            bottom: 17px;
+            outline-style: none;
+            background: #09A3DC;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #ffffff;
+            border: none;
+        }
+
+        #word {
+            width: 242px;
+            height: 35PX;
+            border-radius: 5px;
+            position: absolute;
+            left: 166px;
+            bottom: 93px;
+            outline-style: none;
+            text-indent: 20px;
+            font-size: 16px;
+            background: #ffffff;
+            border: 1px solid #808080;
+        }
+
+        .sub {
+            width: 35px;
+            height: 35px;
+            position: absolute;
+            background: url(images/xiala.png) no-repeat;
+            right: 130px;
+            top: 15px;
+            z-index: 5;
+        }
+
+        .Key {
+            width: 35px;
+            height: 35px;
+            position: absolute;
+            background: url(images/key.png) no-repeat;
+            right: 130px;
+            top: 55px;
+            z-index: 5;
+        }
+
+        #control {
+            width: 120px;
+            height: 40px;
+            float: right;
+        }
+
+        .topControl {
+            width: 40px;
+            height: 40px;
+            float: left;
+            cursor: pointer;
+        }
+
+        .add {
+            width: 32px;
+            height: 32px;
+            background: url(images/add.jpg) no-repeat;
+            float: left;
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+        }
+
+        .logo {
+            float: left;
+            width: 100px;
+            height: 100px;
+            background: url(images/QQbg_04.jpg) no-repeat;
+            position: absolute;
+            top: 12px;
+            left: 56px;
+        }
+
+        .check {
+            background: url(images/checkBox.jpg) no-repeat;
+            width: 18px;, 8 mp . m height : 18 px;
+            margin: 8px 5px;
+            float: left;
+        }
+
+        .onChoice {
+            left: 166px;
+            bottom: 53px;
+            width: 242px;
+            height: 35PX;
+            line-height: 35px;
+            position: absolute;
+
+        }
+
+        .onChoice span {
+            float: left;
+            height: 35px;
+            line-height: 35px;
+            font-size: 16px;
+            font-family: arial, sans-serif;
+        }
+
+        .service {
+            position: absolute;
+            top: 10px;
+            right: 35px;
+            width: 80px;
+            height: 72px;
+            text-align: center;
+        }
+
+        .service span {
+            line-height: 40px;
+        }
+
+        .QRCode {
+            width: 30px;
+            height: 30px;
+            background: url(images/two.jpg) no-repeat;
+            position: absolute;
+            bottom: 13px;
+            right: 13px;
+        }
+
+        .QQ {
+            border-radius: 20px;
+            width: 130px;
+            height: 130px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-align: center;
+            cursor: move;
+        }
+
+        .QQ img {
+            vertical-align: middle;
+            margin: 10px 20px 0 20px;
+        }
+
+        .QQ span {
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+
+    </style>
+</head>
+<body>
+<script>
+    /*
+     *拓展：点击桌面的图标。弹出QQ登录的界面，
+     *
+     *
+     * 1、有没有输入
+     * 2、输入的是不是数字
+     * 3、不能有0在前面
+     * 4、不能是小数
+     * 5、输入的数字必须在5位以上、10位以内
+     */
+    window.onload = function () {
+        var loadIn = document.getElementById("btn");
+        var aInput = document.getElementsByTagName("input");
+        var QQ = document.getElementsByClassName('QQ')[0];
+        var topControl = document.getElementsByClassName('topControl');
+        var wrap = document.getElementById("wrap");
+        topControl[1].onclick = BoxHidden;
+        topControl[2].onclick = BoxHidden;
+        QQ.onclick = BoxShow;
+        QQ.onmouseover = moveChange;
+
+        loadIn.onclick = testQQNum;
+
+
+        function testQQNum() {
+            var value = aInput[0].value;
+            switch (true) {
+                case !value:
+                    alert("你木有输入呀！！");
+                    break;
+                case isNaN(parseInt(value)):
+                    alert("你输入的不是数字呀！！！");
+                    break;
+                case value[0] === 0:
+                    alert("你见过第一位是0的QQ！！你瞎呢？");
+                    break;
+                case (String(parseInt(value)).length != value.length):
+                    alert("你咋还输入小数呢？");
+                    break;
+                case !(5 < value.length && value.length < 10):
+                    alert("亲，你输入的QQ必须在5位以上、10位以内的哟！！！");
+                    break;
+                default:
+                    alert("我靠，你居然输入正确的啊！" + value);
+                    break;
+                /*
+                 *
+                 *这块可以加入语句，执行让登录界面跳转到QQ菜单界面，即，自身消失，然后QQ主页面显示；
+                 * 对应的分组可以自定义属性或者开关控制，然后滑动到个人的QQ后会有颜色变化，点击后，
+                 * 跳转到QQ聊天的界面；
+                 *
+                 **/
+            }
+            aInput[0].value = "";
+            aInput[1].value = "";
+        }
+
+        function BoxShow() {
+            QQBox.style.display = "block"
+        }
+
+        function BoxHidden() {
+            QQBox.style.display = "none"
+        }
+
+        function moveChange() {
+            this.style.background = "#1E7993";
+            this.style.border = "2px solid grey";
+            //获取需要拖拽的div
+            //添加鼠标按下事件
+        }
+
+        function move(obj, attrs, duration, fx, endFn) {
+            var j = {};
+            for (var attr in attrs) {
+                j[attr] = {};
+                j[attr].b = parseFloat(getComputedStyle(obj)[attr])
+                j[attr].c = attrs[attr] - j[attr].b;
+            }
+            var d = duration;
+            var newTime = new Date().getTime();
+            clearInterval(obj.time);
+            obj.time = setInterval(function () {
+                var t = new Date().getTime() - newTime;
+                if (t >= d) {
+                    t = d;
+                }
+                for (var attr in j) {
+                    var b = j[attr].b;
+                    var c = j[attr].c;
+                    var v = Tween[fx](t, b, c, d);
+                    if (attr == 'opacity') {
+                        obj.style[attr] = v;
+                    } else {
+                        obj.style[attr] = v + 'px';
+                    }
+                }
+                if (t == d) {
+                    clearInterval(obj.time);
+                    endFn && endFn();
+                }
+            }, 20);
+        }
+
+        /*
+         t:已运动时间
+         b:起始位置
+         c:运动距离
+         d:总时间
+         * */
+        var Tween = {
+            linear: function (t, b, c, d) {  //匀速
+                return c * t / d + b;
+            },
+            easeIn: function (t, b, c, d) {  //加速曲线
+                return c * (t /= d) * t + b;
+            },
+            easeOut: function (t, b, c, d) {  //减速曲线
+                return -c * (t /= d) * (t - 2) + b;
+            },
+            easeBoth: function (t, b, c, d) {  //加速减速曲线
+                if ((t /= d / 2) < 1) {
+                    return c / 2 * t * t + b;
+                }
+                return -c / 2 * ((--t) * (t - 2) - 1) + b;
+            },
+            easeInStrong: function (t, b, c, d) {  //加加速曲线
+                return c * (t /= d) * t * t * t + b;
+            },
+            easeOutStrong: function (t, b, c, d) {  //减减速曲线
+                return -c * ((t = t / d - 1) * t * t * t - 1) + b;
+            },
+            easeBothStrong: function (t, b, c, d) {  //加加速减减速曲线
+                if ((t /= d / 2) < 1) {
+                    return c / 2 * t * t * t * t + b;
+                }
+                return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
+            },
+            elasticIn: function (t, b, c, d, a, p) {  //正弦衰减曲线（弹动渐入）
+                if (t === 0) {
+                    return b;
+                }
+                if ((t /= d) == 1) {
+                    return b + c;
+                }
+                if (!p) {
+                    p = d * 0.3;
+                }
+                if (!a || a < Math.abs(c)) {
+                    a = c;
+                    var s = p / 4;
+                } else {
+                    var s = p / (2 * Math.PI) * Math.asin(c / a);
+                }
+                return -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
+            },
+            elasticOut: function (t, b, c, d, a, p) {    //正弦增强曲线（弹动渐出）
+                if (t === 0) {
+                    return b;
+                }
+                if ((t /= d) == 1) {
+                    return b + c;
+                }
+                if (!p) {
+                    p = d * 0.3;
+                }
+                if (!a || a < Math.abs(c)) {
+                    a = c;
+                    var s = p / 4;
+                } else {
+                    var s = p / (2 * Math.PI) * Math.asin(c / a);
+                }
+                return a * Math.pow(2, -10 * t) * Math.sin((t * d - s) * (2 * Math.PI) / p) + c + b;
+            },
+            elasticOut: function (t, b, c, d, a, p) {
+                if (t === 0) {
+                    return b;
+                }
+                if ((t /= d / 2) == 2) {
+                    return b + c;
+                }
+                if (!p) {
+                    p = d * (0.3 * 1.5);
+                }
+                if (!a || a < Math.abs(c)) {
+                    a = c;
+                    var s = p / 4;
+                }
+                else {
+                    var s = p / (2 * Math.PI) * Math.asin(c / a);
+                }
+                if (t < 1) {
+                    return -0.5 * (a * Math.pow(2, 10 * (t -= 1)) *
+                            Math.sin((t * d - s) * (2 * Math.PI) / p)) + b;
+                }
+                return a * Math.pow(2, -10 * (t -= 1)) *
+                        Math.sin((t * d - s) * (2 * Math.PI) / p) * 0.5 + c + b;
+            },
+            backIn: function (t, b, c, d, s) {     //回退加速（回退渐入）
+                if (typeof s == 'undefined') {
+                    s = 1.70158;
+                }
+                return c * (t /= d) * t * ((s + 1) * t - s) + b;
+            },
+            backOut: function (t, b, c, d, s) {
+                if (typeof s == 'undefined') {
+                    s = 3.70158;  //回缩的距离
+                }
+                return c * ((t = t / d - 1) * t * ((s + 1) * t + s) + 1) + b;
+            },
+            backBoth: function (t, b, c, d, s) {
+                if (typeof s == 'undefined') {
+                    s = 1.70158;
+                }
+                if ((t /= d / 2 ) < 1) {
+                    return c / 2 * (t * t * (((s *= (1.525)) + 1) * t - s)) + b;
+                }
+                return c / 2 * ((t -= 2) * t * (((s *= (1.525)) + 1) * t + s) + 2) + b;
+            },
+            bounceIn: function (t, b, c, d) {    //弹球减振（弹球渐出）
+                return c - Tween['bounceOut'](d - t, 0, c, d) + b;
+            },
+            bounceOut: function (t, b, c, d) {
+                if ((t /= d) < (1 / 2.75)) {
+                    return c * (7.5625 * t * t) + b;
+                } else if (t < (2 / 2.75)) {
+                    return c * (7.5625 * (t -= (1.5 / 2.75)) * t + 0.75) + b;
+                } else if (t < (2.5 / 2.75)) {
+                    return c * (7.5625 * (t -= (2.25 / 2.75)) * t + 0.9375) + b;
+                }
+                return c * (7.5625 * (t -= (2.625 / 2.75)) * t + 0.984375) + b;
+            },
+            bounceBoth: function (t, b, c, d) {
+                if (t < d / 2) {
+                    return Tween['bounceIn'](t * 2, 0, c, d) * 0.5 + b;
+                }
+                return Tween['bounceOut'](t * 2 - d, 0, c, d) * 0.5 + c * 0.5 + b;
+            }
+        };
+
+        function shake(obj, attr, endFn) {
+            var arr = [];
+            var timer = null;
+            var n = 0;
+            if (!obj.num) {
+                obj.num = parseFloat(getComputedStyle(obj)[attr]);
+            }
+            //拿到一组数字，抖动的幅度。
+            for (var i = 20; i > 0; i -= 2) {
+                arr.push(i, -i);
+            }
+            arr.push(0);
+            //用定时器来实现抖动效果。
+            clearInterval(timer);
+            timer = setInterval(function () {
+                n++;
+                if (n > arr.length - 1) {
+                    clearInterval(timer);
+                    endFn && endFn();
+                }
+                obj.style[attr] = arr[n] + obj.num + 'px';
+            }, 30);
+        }
+
+        var arr = ['linear', 'easeIn', 'easeOut', 'easeBoth', 'easeInStrong', 'easeOutStrong', 'easeBothStrong',
+            'elasticIn', 'elasticOut', 'backIn', 'backOut', 'backBoth', 'bounceIn', 'bounceOut',
+            'bounceBoth'];
+        var arr2 = ['left', 'right', 'width', 'height', 'opacity'];
+        var btn = document.getElementsByClassName("QQ")[0];
+
+        function randomMove() {
+            btn.onmouseover = function () {
+                setInterval(function () {
+                    move(btn, {"left": parseInt(Math.random() * 5) * 200}, 1000, arr[parseInt(Math.random() * arr.length)], function () {
+                        move(btn, {"top": parseInt(Math.random() * 5) * 100}, 1000, arr[parseInt(Math.random() * arr.length)], function () {
+                            randomMove();
+                        })
+                    })
+                }, 3000);
+            }
+        }
+
+        randomMove();
+    };
+</script>
+<div id="wrap">
+    <div class="QQ"><img src="images/my.png" style="height: 90px;width: 80px"><span>小企鹅</span></div>
+    <div id="QQBox">
+        <div class="top">
+            <div id="control">
+                <div class="topControl"></div>
+                <div class="topControl"></div>
+                <div class="topControl"></div>
+            </div>
+        </div>
+        <div class="down">
+            <div class="add"></div>
+            <div class="logo"></div>
+            <input type="text" id="text" value="" placeholder="QQ号/手机/邮箱"/>
+
+            <div class="sub"></div>
+            <div class="Key"></div>
+            <input type="password" id="word" value="" placeholder="密码" style="border-top: none"/>
+
+            <div class="onChoice">
+                <input type="checkbox" id="Remember" class="check">
+                <span>记住密码</span>
+                <input type="checkbox" id="auto" class="check" style="margin-left: 60px">
+                <span>自动登录</span>
+            </div>
+            <input type="button" id="btn" value="登录"/>
+
+            <div class="service">
+                <a href="javascript:;"><span>注册账号</span></a>
+                <a href="javascript:;"><span>找回密码</span></a>
+            </div>
+            <div class="QRCode">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

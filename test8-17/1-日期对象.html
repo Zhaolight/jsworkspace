@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			/*
+			 	日期对象：时间戳
+			 		new Date()
+			 		本地时间，处理日期时间，下面有很多方法，获取设置年月日小时分钟秒等
+			 		1970年1月1日 00:00:00格林尼治时间
+			 		月份是从0开始，0是一月
+			 	设置日期对象参数3种格式
+			 		1.数字，逗号分隔
+			 			年，月，日，小时，分钟，秒
+			 		2.字符串	逗号或者空格分隔，月份是英文，可以是简写(首字母大小写都可以)
+			 			月 日 年 小时:分钟:秒
+			 		3.对象，日期对象
+			 * */
+			var date = new Date();
+			console.log(date)
+			console.log(new Date(0))
+			console.log(new Date(2008,14,1,10,20,30))
+			console.log(new Date('jan,2,2012,10:20:30'))
+			console.log(new Date(new Date()))
+		</script>
+	</body>
+</html>

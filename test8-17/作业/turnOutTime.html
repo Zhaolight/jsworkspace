@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    ul {
+        position: relative;
+        margin-top: 100px;
+        overflow: hidden;
+        height: 70px;
+    }
+
+    li {
+        position: relative;
+        top: 0;
+        left: 0;
+        float: left;
+    }
+
+    img {
+        display: block;
+        border: none;
+        vertical-Lisgn: top;
+    }
+
+</style>
+<body>
+<ul id="oUl">
+    <li>
+        <img src="myImages/0.jpg"/>
+        <img src="myImages/0.jpg"/>
+    </li>
+    <li>
+        <img src="myImages/0.jpg"/>
+        <img src="myImages/0.jpg"/>
+    </li>
+
+    <li>
+        <img src="myImages/c.jpg"/>
+    </li>
+
+    <li>
+        <img src="myImages/0.jpg"/>
+        <img src="myImages/0.jpg"/>
+    </li>
+    <li>
+        <img src="myImages/0.jpg"/>
+        <img src="myImages/0.jpg"/>
+    </li>
+    <li>
+        <img src="myImages/c.jpg"/>
+    </li>
+    <li>
+        <img src="myImages/0.jpg"/>
+        <img src="myImages/0.jpg"/>
+    </li>
+    <li>
+        <img src="myImages/0.jpg"/>
+        <img src="myImages/0.jpg"/>
+    </li>
+</ul>
+</body>
+<script type="text/javascript">
+    var Lis = document.getElementsByTagName('li');
+    var prev = '';
+    var onOff = true;
+    setInterval(autoPlay, 1000);
+    autoPlay();
+    function autoPlay() {
+        var myDate = new Date();
+        var h = myDate.getHours();
+        var m = myDate.getMinutes();
+        var s = myDate.getSeconds();
+        var Lis2 = Lis[2].getElementsByTagName('img')[0];
+        var Lis5 = Lis[5].getElementsByTagName('img')[0];
+        var str = '';
+        str = change(h) + ':' + change(m) + ':' + change(s);
+//        console.log(str);
+        for (var i = 0; i < Lis.length; i++) {
+            /*
+             若为空，就把IMG第0个图片换成当前的时间。
+             */
+            if (prev) {
+                if (i != 2 && i != 5 && str.charAt(i) != prev.charAt(i)) {
+//                    console.log(str.charAt(7));
+                    slide(i, str.charAt(i));
+                }
+            } else {
+                if (i != 2 && i != 5) {
+                    Lis[i].getElementsByTagName('img')[0].src = 'myImages/' + str.charAt(i) + '.jpg';
+                }
+            }
+        }
+        Lis2.src = Lis5.src = 'myImages/c.jpg';
+        setTimeout(function () {
+            Lis2.src = Lis5.src = 'myImages/b.jpg';
+        }, 500);
+        onOff = !onOff;
+        prev = str;
+
+        function slide(index, num) {
+            var oLi = Lis[index];
+            var aImg = oLi.getElementsByTagName('img');
+            oLi.style.top = '0';
+            setTimeout(function () {
+                aImg[1].src = 'myImages/' + num + '.jpg';
+                oLi.style.transition = '.5s top';
+                oLi.style.top = '-70px';
+                setTimeout(function () {
+                    oLi.style.transition = '';
+                    aImg[0].src = 'myImages/' + num + '.jpg';
+                }, 500);
+            }, 2);
+        }
+    }
+    function change(n) {
+        return n < 10 ? '0' + n : '' + n;
+    }
+</script>
+</html>

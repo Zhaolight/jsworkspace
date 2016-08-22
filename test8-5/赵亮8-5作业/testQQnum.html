@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    /*
+     * 1、有没有输入
+     * 2、输入的是不是数字
+     * 3、不能有0在前面
+     * 4、不能是小数
+     * 5、输入的数字必须在5位以上、10位以内
+     */
+    window.onload = function () {
+        var btn = document.getElementById("btn");
+        var aInput = document.getElementsByTagName("input")[0];
+        btn.onclick = function () {
+            var value = aInput.value;
+            if (!value) {  //检测是否输入；如果没有输入，弹出提示框，你木有输入
+                alert("你还木有输入呀！！！")
+            } else if (isNaN(parseInt(value))) { // 不是数字呀
+                alert("你输入的不是数字呀！！！")
+            } else if (value[0] === 0) {
+                alert("你见过第一位是0的QQ！！你瞎呢？");
+            } else if (String(parseInt(value)).length != value.length) {
+                alert("你咋还输入小数呢？")
+            } else if (!(5 < value.length && value.length < 10)) {
+                alert("亲，你输入的QQ必须在5位以上、10位以内的哟！！！")
+            }
+        }
+    }
+</script>
+请输入QQ号码:
+<input type="text" id="text" value=""/>
+<input type="button" id="btn" value="验证"/>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

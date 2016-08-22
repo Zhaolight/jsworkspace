@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>时间</title>
+    <style>
+        body,
+        ul,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+            width: 122px;
+            position: absolute;
+            top: 0;
+            left: 500px;
+        }
+
+        ul {
+            height: 172px;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        li img {
+        }
+
+        p {
+            font-size: 50px;
+        }
+    </style>
+    <script>
+        function fntime(n) {
+            if (n < 10) {
+                return "0" + n;
+            } else {
+                return "" + n;
+            }
+        }
+
+        function getStyle(obj, attr) {
+            return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
+        }
+
+        function doMove(obj, attr, dir, target, endfn) {
+            clearInterval(obj.timer);
+            dir = parseInt(getStyle(obj, attr)) < target ? dir : -dir;
+            obj.timer = setInterval(function () {
+                var speed = parseInt(getStyle(obj, attr)) + dir;
+                if (speed > target && dir > 0 || speed < target && dir < 0) {
+                    speed = target;
+                }
+                obj.style[attr] = speed + "px";
+                if (speed == target) {
+                    clearInterval(obj.timer);
+                    endfn && endfn();
+                }
+            }, 30);
+        }
+
+        function getClass(obj, name) {
+            var arry = [];
+            for (var i = 0; i < obj.length; i++) {
+                if (obj[i].className == name) {
+                    arry.push(obj[i]);
+                }
+            }
+            return arry;
+        }
+        window.onload = function () {
+            var aLi = document.getElementsByTagName("li");
+            var oP = document.getElementsByTagName("p")[0];
+            var aLitime = getClass(aLi, ""); //找到需要的li元素；
+            var lis = getClass(aLi, "fh");
+            //初始化方法；
+            function init() {
+                var time = new Date();
+                var iHour = time.getHours();
+                var iMin = time.getMinutes();
+                var iSec = time.getSeconds();
+                var str = fntime(iHour) + fntime(iMin) + fntime(iSec);
+                oP.innerHTML = str;
+                for (var i = 0; i < aLi.length; i++) {
+                    aLi[i].style.left = 100 + i * 123 + "px";
+                }
+                for (var i = 0; i < aLitime.length; i++) {
+                    var aImg = aLitime[i].getElementsByTagName("img");
+                    var num = parseInt(str.charAt(i));
+                    aImg[0].num = parseInt(str.charAt(i));
+                    aImg[0].src = 'img/' + num + '.JPG';
+                }
+            }
+
+            init();
+
+            function fns() {
+                for (var i = 0; i < lis.length; i++) {
+                    var oImg = lis[i].getElementsByTagName("img")[0];
+                    if (oImg.onOff) {
+                        oImg.src = "img/colon1.jpg";
+                        oImg.onOff = false;
+                    } else {
+                        oImg.src = "img/colon.JPG";
+                        oImg.onOff = true;
+                    }
+                }
+            }
+
+            setInterval(start, 1000);
+            setInterval(fns, 500);
+
+            function start() {
+                //通过日期对象得到时分秒
+                var time = new Date();
+                var iHour = time.getHours();
+                var iMin = time.getMinutes();
+                var iSec = time.getSeconds();
+                var str = fntime(iHour) + fntime(iMin) + fntime(iSec);
+                oP.innerHTML = str;
+                for (var i = 0; i < aLitime.length; i++) {
+                    var aImg = aLitime[i].getElementsByTagName("img");
+                    var num = parseInt(str.charAt(i));
+                    demo(aLitime[i], num, aImg);
+                }
+            }
+
+            function demo(obj, num, img) {
+                img[1].src = 'img/' + num + '.JPG';
+                if (img[0].num != num) {
+                    doMove(obj, "top", 15, -172, function () {
+                        obj.style.top = 0;
+                        img[0].src = 'img/' + num + '.JPG';
+                        img[0].num = num;
+                    })
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+<p></p>
+<ul>
+    <li>
+        <img src="../img/images/0.JPG">
+        <img src="../img/images/0.JPG">
+    </li>
+    <li>
+        <img src="../img/images/0.JPG">
+        <img src="../img/images/0.JPG">
+    </li>
+    <li class="fh">
+        <img src="../img/images/colon.JPG">
+    </li>
+    <li>
+        <img src="../img/images/0.JPG">
+        <img src="../img/images/0.JPG">
+    </li>
+    <li>
+        <img src="../img/images/0.JPG">
+        <img src="../img/images/0.JPG">
+    </li>
+    <li class="fh">
+        <img src="../img/images/colon.JPG">
+    </li>
+    <li>
+        <img src="../img/images/0.JPG">
+        <img src="../img/images/0.JPG">
+    </li>
+    <li>
+        <img src="../img/images/0.JPG">
+        <img src="../img/images/0.JPG">
+    </li>
+
+</ul>
+</body>
+
+</html>

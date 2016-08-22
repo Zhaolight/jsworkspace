@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>一组开关控制多组照片的播放以及自定义函数</title>
+    <style type="text/css">
+        #frame {
+            margin: 50px auto;
+            width: 950px;
+            height: 551px;
+            background: url(images/bg.jpg) no-repeat;
+            border: 1px solid #ff0000;
+            position: relative;
+        }
+
+        #control {
+            position: absolute;
+            top: 60px;
+            left: 40px;
+        }
+
+        #group1 {
+            position: absolute;
+            top: 180px;
+            left: 75px;
+            width: 449px;
+            height: 320px;
+            text-align: center;
+
+        }
+
+        #group2 {
+            position: absolute;
+            top: 180px;
+            left: 610px;
+            width: 270px;
+            height: 320px;
+            text-align: center;
+        }
+
+        .img1 {
+            width: 449px;
+            height: 250px;
+
+        }
+
+        #img2 {
+            width: 270px;
+            height: 250px;
+        }
+
+        .pages {
+            position: absolute;
+            bottom: 0;
+            left: 5px;
+            font-size: 16px;
+            color: #000;
+            font-weight: bold;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var aInput = document.getElementsByTagName("input");
+            var aImg = document.getElementsByTagName("img");
+            var aSpan = document.getElementsByClassName("pages");
+            var tips = document.getElementsByClassName("tip");
+            var arr1 = ["images/1_1.jpg", "images/1_2.jpg", "images/1_3.jpg", "images/1_4.jpg"];
+            var arr2 = ["images/2_1.jpg", "images/2_2.jpg", "images/2_3.jpg"];
+            var textArr1 = ["第一组第1张", "第一组第2张", "第一组第3张", "第一组第4张"];
+            var textArr2 = ["第二组第1张", "第二组第2张", "第二组第3张"];
+            var n1 = 0;  //同步开关1
+            var n2 = 0;  //同步开关2
+
+            function fn0() {//构造相册1轮播函数，包括地址的更替，页码，文字提示
+                aImg[0].src = arr1[n1];
+                aSpan[0].innerHTML = n1 + 1 + '/' + arr1.length;
+                tips[0].innerHTML = textArr1[n1];
+            }
+
+            function fn1() {//构造相册2轮播函数，包括地址的更替，页码，文字提示
+                aImg[1].src = arr2[n2];
+                aSpan[1].innerHTML = n2 + 1 + '/' + arr2.length;
+                tips[1].innerHTML = textArr2[n2];
+            }
+
+            fn0(); //调用函数，填充页面上初始化之后的空白处
+            fn1(); //调用函数，填充页面上初始化之后的空白处
+
+            function loop0() {
+                //相册1正序播放函数
+                n1++;
+                if (n1 > arr1.length - 1) {
+                    n1 = 0
+                }
+                fn0();
+            }
+
+            function loop1() {
+                //相册2正序播放函数
+                n2++;
+                if (n2 > arr2.length - 1) {
+                    n2 = 0
+                }
+                fn1();
+            }
+
+            function loop2() {
+                //相册1倒序播放函数
+                n1--;
+                if (n1 < 0) {
+                    n1 = arr1.length - 1
+                }
+                fn0();
+                n2--;
+            }
+
+            function loop3() {
+                //相册2倒序播放函数
+                if (n2 < 0) {
+                    n2 = arr2.length - 1
+                }
+                fn1();
+
+            }
+
+            aInput[1].onclick = function () {
+                //下一组点击事件，利用下标自增控制循环正序播放；
+                loop0();
+                loop1();
+            };
+
+
+            aInput[0].onclick = function () {
+                //上一组点击事件，利用下标自减控制循环倒序播放；
+                loop2();
+                loop3()
+            };
+            aImg[0].onclick = function () {
+                //相册1的正序循环播放函数
+                loop0()
+            };
+            aImg[1].onclick = function () {
+                //相册2的正序播放函数
+                loop1()
+            }
+        }
+
+    </script>
+</head>
+<body>
+<div id="frame">
+    <div id="control">
+        <input type="button" value="上一组">
+        <input type="button" value="下一组">
+    </div>
+    <div id="group1">
+        <img src="" class="img1">
+        <span class="tip"></span>
+        <span class="pages"></span>
+
+    </div>
+    <div id="group2">
+        <img src="" id="img2">
+        <span class="tip"></span>
+        <span class="pages"></span>
+
+
+    </div>
+
+
+</div>
+</body>
+</html>

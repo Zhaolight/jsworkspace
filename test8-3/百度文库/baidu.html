@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body, ul, li, p {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul {
+            float: left;
+        }
+
+        li {
+            float: left;
+            width: 30px;
+            height: 80px;
+            list-style: none;
+            line-height: 80px;
+            background: url(images/icon.png) no-repeat 0 25px;
+        }
+
+        #box {
+            width: 636px;
+            height: 80px;
+            line-height: 80px;
+            margin: 200px auto;
+            border: 1px solid #0000ff;
+            position: relative;
+        }
+
+        #right {
+            font-weight: bold;
+            float: left;
+        }
+
+        .active {
+            background: url(images/icon.png) no-repeat 0 25px;
+        }
+
+        .active1 {
+            background: url(images/iconu.png) no-repeat 0 25px;
+        }
+
+        .active2 {
+            background: url(images/iconh.png) no-repeat 0 25px;
+        }
+
+        .red {
+            float: left;
+            color: #ff0000;
+        }
+
+        a {
+            float: left;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var textArr = ['很差', '较差', '一般', '推荐', '力荐'];
+            var p = document.getElementsByTagName("p")[0];
+            var aLi = document.getElementsByTagName("li");
+            for (var i = 0; i < aLi.length; i++) {
+                var cn = -1;
+                aLi[i].index = i;
+                aLi[i].on = true;
+                aLi[i].onmouseover = function () {
+                    for (var j = 0; j < aLi.length; j++) {
+                        aLi[j].className = "active";//清除所有的状态，改为原本的背景图
+                    }
+                    for (var i = 0; i <= this.index; i++) {  //匹配对应的状态，即鼠标滑过到哪里，之前所有的背景都对应的改变；
+                        if (this.index < 2) {
+                            aLi[i].className = "active1"
+                        } else {
+                            aLi[i].className = "active2"
+                        }
+                        p.innerHTML = '<span class="red">' + textArr[i] + '</span>';  //对应的文字也改变
+                    }
+                };
+
+                aLi[i].onmouseout = function () {
+                    for (var i = 0; i <= this.index; i++) {  //当鼠标移出的时候；
+                        aLi[i].className = 'active';       //先清除所有的背景；
+                        p.innerHTML = '<span class="red">小提示，点击星星就能对当前效果进行评分哟</span>';
+                    }
+                    for (var i = 0; i <= cn; i++) {
+                        aLi[i].className = "active1";
+                        if (cn > 1) {
+                            aLi[i].className = "active2"
+                        }
+                        p.innerHTML = '<span class="red">' + textArr[i] + '</span>';
+                    }
+                };
+                aLi[i].onclick = function () {
+                    cn = this.index;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="box">
+    <a href="#"><span class="red">*</span>总体评分:</a>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <p id="right"><span class="red">小提示，点击星星就能对当前效果进行评分哟</span></p>
+</div>
+</body>
+</html>

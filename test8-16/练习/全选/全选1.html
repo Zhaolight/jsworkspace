@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<style>
+ul , p { width:300px; padding:0; margin:0; margin:0 auto; }
+p { padding-top:20px; }
+li { list-style:none; border-bottom:1px solid #333; height:30px; line-height:30px; }
+.yellow{
+	background-color: yellow;
+}
+.red{
+	background-color: red;
+}
+.hover{
+	background-color: black;
+	color: #fff;
+}
+.checked{
+	background-color: green;
+	color:#fff;
+}
+
+</style>
+</head>
+
+<body>
+
+<ul>
+	<li><input type="checkbox" />信乐团 - 海阔天空</li>
+	<li><input type="checkbox" />五月天 - 倔强</li>
+	<li><input type="checkbox" />薛之谦 - 演员</li>
+	<li><input type="checkbox" />杨宗纬 - 一次就好</li>
+	<li><input type="checkbox" />周杰伦 - 安静</li>
+</ul>
+<p><input type="checkbox" id="all"/> 全选</p>
+
+<script>
+	//eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)d[e(c)]=k[c]||e(c);k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1;};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p;}('3 a=p.v(\'s\');3 b=p.i(\'w\')[0];3 c=b.i(\'x\');3 d=b.i(\'y\');j(3 e=0;e<d.m;e++){7(e%2){d[e].6=\'A\'}l{d[e].6=\'z\'};d[e].o=d[e].6;d[e].t=5(){1.6=\'u\'};d[e].D=5(){1.6=1.o};c[e].k=e;c[e].n=5(){7(1.4){d[1.k].9.8=\'r\'}l{d[1.k].9.8=\'\';};a.4=f(c)}};5 f(g){j(3 h=0;h<g.m;h++){7(!g[h].4){q B}};q C};a.n=5(){j(3 g=0;g<c.m;g++){c[g].4=1.4;7(1.4){d[g].9.8=\'r\'}l{d[g].9.8=\'\'}}}',40,40,'|this||var|checked|function|className|if|background|style|||||||||getElementsByTagName|for|index|else|length|onchange|color|document|return|green|all|onmouseover|hover|getElementById|ul|input|li|red|yellow|false|true|onmouseout'.split('|'),0,{}))
+	/*
+	 	1.li隔行变色
+	 	2.添加事件处理
+	 		li:mouseover
+	 		        变黑色，hover
+	 		   mouseout
+	 		       判断：已选中，绿色checked
+	 		                   未选中，原来颜色
+	 		input:click
+	 			判断是否全选
+	 		all:click
+	 			判断：选中，所有input全选中，li全色checked
+	 				取消选中，所有input未选中，li原来颜色	
+	 * */
+	var all = document.getElementById('all');
+	var lis = document.getElementsByTagName('li');
+	var inps = document.getElementsByTagName('ul')[0].getElementsByTagName('input');
+	for(var i=0;i<lis.length;i++){
+		if(i%2){
+			lis[i].className = 'yellow';
+		}else{
+			lis[i].className = 'red';
+		}
+		fn(i);
+	}
+	all.onclick = function(){
+		if(this.checked){
+			for(var i=0;i<lis.length;i++){
+				lis[i].className = 'checked';
+				inps[i].checked = true;
+			}
+		}else{
+			for(var i=0;i<lis.length;i++){
+				lis[i].className = lis[i].color;
+				inps[i].checked = false;
+			}
+		}
+	}
+	function fn(n){
+		lis[n].color = lis[n].className;
+		lis[n].onmouseover = function(){
+			this.className = 'hover';
+		}
+		lis[n].onmouseout = function(){
+			if(inps[n].checked){
+				this.className = 'checked';
+			}else{
+//				this.className = n%2?'yellow':'red';
+				this.className = this.color;
+			}
+		}
+		inps[n].onclick = function(){
+			var n = 0;
+			for(var i=0;i<inps.length;i++){
+				if(inps[i].checked){
+					n++;
+				}
+			}
+//			console.log(n,inps.length)
+			if(n == inps.length){
+				all.checked = true;
+			}else{
+				all.checked = false;
+			}
+		}
+		
+	}
+</script>
+
+</body>
+</html>

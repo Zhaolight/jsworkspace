@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #box {
+            width: 800px;
+            height: 300px;
+            margin: 50px auto;
+        }
+
+        .active {
+            background: #ff0000;
+        }
+
+        p.over {
+            display: none;
+        }
+
+        p.out {
+            display: block;
+            width: 200px;
+            height: 200px;
+            background: orange;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var btn = document.getElementsByTagName("input");
+            var tips = document.getElementsByTagName("p");
+            var prevNum = 0;//设定索引值变量，用于记录上一个点击事件
+            for (var i = 0; i < btn.length; i++) {
+                btn[i].index = i;  //记录点击的第几个
+                btn[i].onclick = function () {
+                    btn[prevNum].className = "";  //清空上一个点击的是第几个，待会便于找到对应的P
+                    tips[prevNum].className = "over";
+                    this.className = "active";
+                    tips[this.index].className = "out";
+                    prevNum = this.index; //上一个的索引定位于这一个
+
+                };
+            }
+
+
+        }
+
+
+    </script>
+</head>
+<body>
+<div id="box">
+    <input type="button" class="active" value="按钮1">
+    <input type="button" value="按钮2">
+    <input type="button" value="按钮3">
+    <input type="button" value="按钮4">
+    <input type="button" value="按钮5">
+    <input type="button" value="按钮6">
+    <input type="button" value="按钮7">
+
+
+    <p class="out">内容1</p>
+
+    <p class="over">内容2</p>
+
+    <p class="over">内容3</p>
+
+    <p class="over">内容4</p>
+
+    <p class="over">内容5</p>
+
+    <p class="over">内容6</p>
+
+    <p class="over">内容7</p>
+
+</div>
+</body>
+</html>

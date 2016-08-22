@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<img src="images/0.JPG"/>
+		<img src="images/0.JPG"/>
+		<img src="images/b.JPG"/>
+		<img src="images/0.JPG"/>
+		<img src="images/0.JPG"/>
+		<img src="images/b.JPG"/>
+		<img src="images/0.JPG"/>
+		<img src="images/0.JPG"/>
+		<script type="text/javascript">
+		/*
+		 	str.charAt(0)
+		 		字符串的方法，查看哪一位是什么
+		 * */
+			var imgs = document.getElementsByTagName('img');
+			//显示初始化
+			show();
+			function show(){
+				//时间戳，获取当前的小时，分钟，秒
+				var date = new Date();
+				var h = date.getHours();
+				var m = date.getMinutes();
+				var s = date.getSeconds();
+				var str = '';
+				//拼成字符串和img格式一样
+				str = toDouble(h)+':'+toDouble(m)+':'+toDouble(s);
+				console.log(str);
+				//循环每一位img的数字调成对应的
+				for(var i=0;i<imgs.length;i++){
+					if(i ==2 || i == 5){
+						imgs[i].src = 'img/b.JPG';
+						continue;
+					}
+					imgs[i].src = 'img/'+str.charAt(i)+'.jpg';
+				}
+				//点闪烁
+				setTimeout(function(){
+					for(var i=0;i<imgs.length;i++){
+						if(i == 2 || i == 5){
+							imgs[i].src = 'img/c.jpg';
+						}
+					}
+				},500)
+			}
+			//开个定时器，1秒执行一次
+			setInterval(show,1000);
+			//补0
+			function toDouble(n){
+				return n<10?'0'+n:''+n;
+			}
+		</script>
+	</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,412 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>抢购商品</title>
+    <style>
+        body, ul, ol, p, h3, input {
+            padding: 0;
+            margin: 0;
+            font-size: 12px;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        b, em {
+            font-style: normal;
+        }
+
+        img {
+            border: none;
+            cursor: pointer;
+        }
+
+        .box {
+            padding: 10px;
+            width: 648px;
+            margin: 30px auto;
+            border: 1px solid #ccc;
+        }
+
+        .h3s {
+            height: 28px;
+            line-height: 28px;
+            border-bottom: 2px solid #9e9e9e;
+            color: #6e6e6e;
+            font-size: 14px;
+        }
+
+        .h3s span {
+            padding-left: 20px;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .con {
+            width: 648px;
+            height: 280px;
+            overflow: hidden;
+            position: relative;
+            background: url(img/none.jpg) 0 0 repeat no-repeat;
+        }
+
+        .none {
+            width: 325px;
+            height: 280px;
+            position: absolute;
+            left: 0;
+            top: 0;
+
+            display: none;
+            z-index: 10;
+        }
+
+        .box ul {
+            height: 280px;
+        }
+
+        .box ul li {
+            width: 162px;
+            height: 280px;
+            float: left;
+            position: relative;
+            left: 0;
+            top: 0;
+        }
+
+        .goods {
+            width: 151px;
+            height: 264px;
+            border-right: 2px solid #f2f2f2;
+            padding: 5px 0 10px 9px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: white;
+            z-index: 20;
+        }
+
+        .dinput {
+            width: 151px;
+            height: 21px;
+            margin-bottom: 15px;
+        }
+
+        .txt {
+            width: 110px;
+            height: 19px;
+            line-height: 19px;
+            background-color: #dadada;
+            border: 1px solid #f2f2f2;
+            color: #323232;
+            float: left;
+        }
+
+        .btn {
+            float: left;
+            cursor: pointer;
+        }
+
+        .remtime {
+            width: 143px;
+            padding-left: 8px;
+            height: 16px;
+            line-height: 16px;
+            overflow: hidden;
+            margin-bottom: 14px;
+            color: black;
+            display: block;
+            font-weight: bold;
+        }
+
+        .dimg {
+            width: 120px;
+            height: 117px;
+            padding: 18px 10px 14px 10px;
+            position: relative;
+        }
+
+        .dimg b {
+            position: absolute;
+            width: 48px;
+            height: 36px;
+            padding-top: 12px;
+            right: 0;
+            top: 0;
+            background: url(img/b.png) 0 0 no-repeat;
+            text-align: center;
+            color: #fff;
+        }
+
+        .dimg b span {
+            font-size: 20px;
+            display: block;
+            height: 20px;
+        }
+
+        .dps {
+            width: 145px;
+            height: 32px;
+            line-height: 16px;
+            color: #6e6e6e;
+            overflow: hidden;
+        }
+
+        .price {
+            width: 145px;
+            height: 16px;
+            line-height: 16px;
+            color: #c0c0c0;
+        }
+
+        .price em {
+            font-style: normal;
+            color: #b9003d;
+        }
+
+        .detail {
+            width: 648px;
+            height: 36px;
+            margin-bottom: 3px;
+            background-color: #e6e6e6;
+        }
+
+        .detail p, .detail span {
+            float: left;
+            width: 180px;
+            text-align: center;
+            overflow: hidden;
+            color: #323232;
+            font-weight: bold;
+            line-height: 36px;
+        }
+
+        .box ol {
+            width: 648px;
+        }
+
+        .box ol li {
+            width: 603px;
+            height: 62px;
+            background-color: #e6e6e6;
+            padding: 10px 45px 10px 0;
+            margin-bottom: 3px;
+        }
+
+        .box ol li p, .box ol li span {
+            float: left;
+            width: 170px;
+            text-align: center;
+            overflow: hidden;
+            color: #323232;
+            height: 62px;
+            line-height: 62px;
+            padding: 0 5px;
+        }
+
+        .box ol li span {
+            font-weight: bold;
+        }
+
+        .box ol li div {
+            width: 77px;
+            height: 60px;
+            background-color: #fff;
+            border: 1px solid #626262;
+            float: right;
+        }
+
+        .box ol li div img {
+            display: block;
+            width: 77px;
+            height: 60px;
+        }
+
+        .result {
+            height: 44px;
+            line-height: 44px;
+            padding-left: 10px;
+            color: #000;
+            font-size: 14px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .result strong {
+            color: #b9003d;
+        }
+
+        .result input {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        #test {
+            width: 200px;
+            height: 200px;
+            background: red;
+            /*opacity: 1;*/
+        }
+    </style>
+</head>
+
+<body>
+<div class="box" id="box">
+    <h3 class="h3s">限购时间<span id="my">(输入格式为：Aug,22,2016 10:00:00)</span></h3>
+
+    <div class="con">
+        <div class="none" id="none"></div>
+        <ul>
+            <li>
+                <div class="goods">
+                    <div class="dinput">
+                        <input type="text" class="txt" value=""/>
+                        <input type="button" class="btn" value="确定"/>
+                    </div>
+                    <span class="remtime">剩余00天00小时00分00秒</span>
+
+                    <div class="dimg"><img src="img/txd.jpg" width="120" height="117" alt=""/> <b><span>8.8</span>折</b>
+                    </div>
+                    <p class="dps">飞利浦（Philips）RQ370 锐锋系列电动剃须刀</p>
+
+                    <p class="price">抢购价：<em>￥</em><em>455.00</em></p>
+                </div>
+            </li>
+
+            <li>
+                <div class="goods">
+                    <div class="dinput">
+                        <input type="text" class="txt" value=""/>
+                        <input type="button" class="btn" value="确定"/>
+                    </div>
+                    <span class="remtime">剩余00天00小时00分00秒</span>
+
+                    <div class="dimg"><img src="img/dn.jpg" width="120" height="117" alt=""/> <b><span>8.8</span>折</b>
+                    </div>
+                    <p class="dps">索尼（SONY） SVF15A18SCB 15.5英寸触控笔记本 </p>
+
+                    <p class="price">抢购价：<em>￥</em><em>5599.00</em></p>
+                </div>
+            </li>
+            <li>
+                <div class="goods">
+                    <div class="dinput">
+                        <input type="text" class="txt" value=""/>
+                        <input type="button" class="btn" value="确定"/>
+                    </div>
+                    <span class="remtime">剩余00天00小时00分00秒</span>
+
+                    <div class="dimg"><img src="img/sj.jpg" width="120" height="117" alt=""/> <b><span>8.8</span>折</b>
+                    </div>
+                    <p class="dps">联想VIBE Z K910（铂雅银） WCDMA/GSM　双卡双待双通</p>
+
+                    <p class="price">抢购价：<em>￥</em><em>2299.00</em></p>
+                </div>
+            </li>
+            <li>
+                <div class="goods">
+                    <div class="dinput">
+                        <input type="text" class="txt" value=""/>
+                        <input type="button" class="btn" value="确定"/>
+                    </div>
+                    <span class="remtime">剩余00天00小时00分00秒</span>
+
+                    <div class="dimg"><img src="img/watch.jpg" width="120" height="117" alt=""/>
+                        <b><span>8.8</span>折</b></div>
+                    <p class="dps">BURBERRY/巴宝莉 时尚英伦格纹优雅石英中性</p>
+
+                    <p class="price">抢购价：<em>￥</em><em>899.00</em></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="detail">
+        <p>商品名称</p>
+        <span>价钱</span>
+    </div>
+    <ol>
+        <!--   <li><p>BURBERRY/巴宝莉 时尚英伦格纹优雅石英中性</p><span>899.00</span>
+
+               <div><img src="img/watch.jpg" width="77" height="60" alt=""/></div>
+           </li>-->
+    </ol>
+    <div class="result" id="result">
+        总价：<strong>0.00</strong>元
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="move.js"></script>
+<script type="text/javascript">
+    /* 1.设置时间；
+     * 2.获取当前时间与设置时间对比,开定时器输出倒计时；
+     * 3.倒计时结束，商品抖动动态下架；
+     * 4.下面累计显示下架的商品，并求计算求和；
+     * */
+    var btnS = document.getElementsByClassName('btn');
+    var textS = document.getElementsByClassName('txt');
+    var remTime = document.getElementsByClassName('remtime');
+    var goods = document.getElementsByClassName('goods');
+    var oL = document.getElementsByTagName('ol')[0];
+    var Strong = document.getElementsByTagName('strong')[0];
+    //    console.log(oL);
+    var monthArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Spt", "Oct", "Nov", "Dec"];//转化月份；
+    /*数组存放下架后需要显示的商品信息，包括各商品的简介、价格、图片*/
+    var GoodNameArr = ["飞利浦（Philips）RQ370 锐锋系列电动剃须刀", "索尼（SONY）SVF15A18SCB 15.5英寸触控笔记本", "联想VIBE Z K910（铂雅银） WCDMA/GSM　双卡双待", "BURBERRY/巴宝莉时尚英伦格纹优雅石英中性"];
+    var PriceArr = ['455.00', '5599.00', '2299.00', '899.00'];
+    var GoodsArr = ["img/txd.jpg", "img/dn.jpg", "img/sj.jpg", "img/watch.jpg"];
+    var myDate = new Date();
+    document.getElementById('my').innerHTML = '输入格式为：（' + monthArr[myDate.getMonth()] + ',' + myDate.getDate() + ',' + myDate.getFullYear() + ' ' + toDouble(myDate.getHours()) + ':' + toDouble(myDate.getMinutes()) + ':' + toDouble(myDate.getSeconds()) + '）';
+    for (var i = 0; i < btnS.length; i++) {
+        backTime(i);
+    }
+    function toDouble(n) {//补0函数；
+        return n < 10 ? '0' + n : '' + n;
+    }
+    function backTime(n) {//构造传参函数；利用循环减少代码；
+        var setTime = new Date();//获取时间以备输入之用(输入格式为：Aug,22,2016 10:00:00)
+        var Mth = monthArr[setTime.getMonth()]; //setTime.getMonth()获取的是数字，将其转化为英文；
+        var D = setTime.getDate();
+        var Y = setTime.getFullYear();
+        var H = setTime.getHours();
+        var Min = setTime.getMinutes();
+        var S = setTime.getSeconds();
+        /* 拼接字符串setStr，初始化页面倒计时输入框里面的内容*/
+        var setStr = Mth + ',' + toDouble(D) + ',' + toDouble(Y) + ' ' + toDouble(H) + ':' + toDouble(Min) + ':' + toDouble(S);
+        textS[n].value = textS[n].value ? textS[n].value : setStr;//输入框显示时间，如果输入了则使用输入的时间；反之则使用获取的当前时间；
+        var time = null;//注意此处的time实际是n个time由于闭包效果故可重名，若设置全局变量，则后面无法实现清除的效果：
+        btnS[n].onclick = function () {
+            var setTime2 = new Date(textS[n].value ? textS[n].value : setStr); //设置倒计时的节点时间；如果输入了则使用输入的时间；反之则使用获取的当前时间
+            clearInterval(time);//先清除定时器消除连续点击产生的不断重复开启定时器的bug；
+            /*确认按钮点击的触发定期器，并开启倒计时模式，即设置时间-现在时间=剩余时间；页面显示剩余时间；*/
+            time = setInterval(function () {
+                var nowTime = new Date();//获取现在时间；
+                var shyTime = (setTime2 - nowTime) / 1000;//剩余时间（毫秒/1000）;
+//                console.log(shyTime);
+                if (shyTime > 0) {//将毫秒类型的剩余时间转化为年月、日、时、分、秒
+                    var d = Math.floor(shyTime / 86400);
+                    var h = Math.floor(shyTime % 86400 / 3600);
+                    var m = Math.floor(shyTime % 86400 % 3600 / 60);
+                    var s = Math.floor(shyTime % 60);
+                    var str = '';
+                    str += '剩余' + toDouble(d) + '天' + toDouble(h) + '小时' + toDouble(m) + '分' + toDouble(s) + '秒';
+                    remTime[n].innerHTML = str;
+                } else {
+                    /* 剩余时间<0即倒计时结束；开始实现商品下架功能；*/
+                    clearInterval(time);//清除倒计时；
+                    shake(goods[n], 'left', function () {//抖动，抖动结束过后向下运动,并且变透明，然后触发商品信息变更函数；
+                        move(goods[n], {'top': 300, 'opacity': 0}, 1500, 'easeOut', function () {
+                            oL.innerHTML += '<li><p>' + GoodNameArr[n] + '</p><span>' + PriceArr[n] + '</span>' + '<div><img src="' + GoodsArr[n] + '"width="77" height="60" alt="" /></div></li>';
+                            var PriceNum = 0;//数字类型变量；
+                            PriceNum = parseFloat(PriceArr[n]);//转化为数字类型价格；
+                            Strong.innerHTML = parseFloat(Strong.innerHTML) + PriceNum;//输出，实现数字类型的累加效果；
+                        })
+                    })
+                }
+            }, 300);
+        };
+    }
+</script>

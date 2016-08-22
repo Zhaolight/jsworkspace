@@ -1,0 +1,130 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <style type="text/css">
+        ul, ol {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+            width: 100%;
+            text-align: center;
+        }
+
+        h2 {
+            margin: 0;
+            background: url(img/right.gif) no-repeat 10px center #63F7FF;
+            padding-left: 20px;
+            line-height: 30px;
+        }
+
+        ul {
+            border: 1px solid black;
+            width: 150px;
+        }
+
+        ol {
+            display: none;
+        }
+
+        ol li {
+            line-height: 20px;
+            border-top: 1px solid black;
+            text-align: center;
+            display: block;
+            cursor: pointer;
+        }
+
+        ol li:nth-child(1) {
+            border: none;
+        }
+
+        ol li.active {
+            background-color: #63F7FF;
+        }
+
+        h2.active {
+            background: url(img/down.gif) no-repeat 8px center #F7F794;
+        }
+
+        h2.active + ol {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+<ul id="list">
+    <li>
+        <h2><a href="javascript:;">我的好友</a></h2>
+        <ol>
+            <li>张三</li>
+            <li>张三</li>
+            <li>张三</li>
+            <li>张三</li>
+        </ol>
+    </li>
+    <li>
+        <h2><a href="javascript:;">企业好友</a></h2>
+        <ol>
+            <li>李四</li>
+            <li>李四</li>
+            <li>李四</li>
+            <li>李四</li>
+            <li>李四</li>
+        </ol>
+    </li>
+    <li>
+        <h2><a href="javascript:;">黑名单</a></h2>
+        <ol>
+            <li>钟毅</li>
+            <li>钟毅</li>
+            <li>钟毅</li>
+        </ol>
+    </li>
+</ul>
+</body>
+</html>
+<script type="text/javascript">
+    window.onload = function () {
+        var oH = document.getElementsByTagName('h2');
+        var aOL = document.getElementsByTagName("ol");
+        var list = document.getElementById("list");
+        var ool = list.getElementsByTagName('ol');
+        for (var i = 0; i < oH.length; i++) {
+            aLi = ool[i].getElementsByTagName('li');//获取到所有的ol下的li
+            for (var j = 0; j < aLi.length; j++) {
+                aLi[j].onmouseover = function () {//滑过时间
+                    this.style.background = "orange";
+                };
+                aLi[j].onmouseout = function () {
+                    this.style.background = "none";
+                };
+            }
+            oH[i].index = i;//设置索引值找到对应oH下的li
+            oH[i].on = true;  //设置自定义属性控制每个ol的属性
+            oH[i].onclick = function () {
+                if (this.on == true) { //如果属性为on，则执行下列程序；
+                    for (var i = 0; i < oH.length; i++) {//清除所有显示
+                        aOL[i].style.display = "none";
+                        oH[i].on = true;//清除当前的点击的属性
+                    }
+                    aOL[this.index].style.display = "block";//显示当前点击的
+                    this.on = false;
+                } else {
+                    aOL[this.index].style.display = 'none';
+                    this.on = true;
+                }
+            }
+        }
+    }
+</script>
