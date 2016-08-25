@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        #box {
+            width: 500px;
+            height: 300px;
+            border: 1px solid red;
+        }
+
+        span {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<div id="box"></div>
+<input type="text" id="inp"/>
+<input type="button" value="传送" id="btn"/>
+</body>
+</html>
+<script type="text/javascript">
+    var Span = document.getElementsByTagName('span');
+    var box = document.getElementById('box');
+    var Input = document.getElementsByTagName('input');
+    var time = null;
+    Input[1].onclick = function () {
+        clearInterval(time);
+        function getRandNumber(rmin, rmax) {
+            var cha = rmax - rmin;
+            var rand = Math.random();
+            return rmin + Math.round(cha * rand)
+        }
+
+        time=setInterval(function () {
+            var arr2 = [
+                getRandNumber(0, 255),
+                getRandNumber(0, 255),
+                getRandNumber(0, 255)
+            ];
+            var vel = Input[0].value;
+            var strArr = vel.split('');
+            for (var i = 0; i < strArr.length; i++) {
+                strArr[i] = '<span style="background:' + "rgb(" + arr2[0] + "," + arr2[1] + "," + arr2[2] + ")" + '">' + strArr[i] + '</span>'
+            }
+            box.innerHTML = strArr.join('');
+        }, 130);
+    }
+
+
+</script>

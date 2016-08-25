@@ -1,0 +1,156 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>无标题文档</title>
+    <style type="text/css">
+        body {
+            background-color: #F1F1F1;
+        }
+
+        ul {
+            margin: 0 auto;
+            padding: 0;
+            width: 1208px;
+        }
+
+        li {
+            list-style-type: none;
+            float: left;
+            padding: 10px;
+            margin: 0 1px;
+            background-color: white;
+        }
+
+        p {
+            margin: 0;
+            text-align: center;
+            background-color: #F1F1F1;
+            line-height: 40px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        img {
+            vertical-align: top;
+        }
+
+        div {
+            margin: 0 auto;
+            width: 210px;
+        }
+
+        div:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        a {
+            text-decoration: none;
+            width: 100px;
+            line-height: 40px;
+            display: block;
+            color: white;
+            background-color: #009999;
+            text-align: center;
+            float: left;
+        }
+
+        a:nth-child(1) {
+            margin-right: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div>
+    <a href="javascript:;">从小到大</a><a href="javascript:;">打乱顺序</a>
+</div>
+<ul>
+    <li><img src="img/1.jpg" alt="">
+
+        <p>1-温馨办公</p></li>
+    <li><img src="img/2.jpg" alt="">
+
+        <p>2-游戏桌面</p></li>
+    <li><img src="img/3.jpg" alt="">
+
+        <p>3-汽车摇滚</p></li>
+    <li><img src="img/4.jpg" alt="">
+
+        <p>4-狭路相逢</p></li>
+    <li><img src="img/5.jpg" alt="">
+
+        <p>5-棒球小子</p></li>
+    <li><img src="img/6.jpg" alt="">
+
+        <p>6-球鞋动力</p></li>
+    <li><img src="img/7.jpg" alt="">
+
+        <p>7-游戏官网</p></li>
+    <li><img src="img/8.jpg" alt="">
+
+        <p>8-指尖社区</p></li>
+</ul>
+</body>
+</html>
+<script type="text/javascript">
+    var btnS = document.getElementsByTagName('a');
+    var oUL = document.getElementsByTagName('ul')[0];
+    var arr = ['1', '2', '3', '4', '5', '6', '7', '8'];
+    var arr2 = ['1-温馨办公', '2-游戏桌面', '3-汽车摇滚', '4-狭路相逢', '5-棒球小子', '6-球鞋动力', '7-游戏官网', '8-指尖社区'];
+    var onOFF = false;//开关控制切换；
+    btnS[0].onclick = function () {
+        this.innerHTML = "从小到大";//按钮切换；
+        if (onOFF) {
+            var str = '';
+            order(arr);//调用正序函数；
+            for (var i = 0; i < arr.length; i++) {//循环渲染；
+                var b = arr[i];//此时设置一变量存储我们改变了的数组的每一项；
+                str += '<li><img src="img/' + arr[i] + '.jpg" alt=""><p>' + arr2[b - 1] + '</p></li>';//因为是从1开始的所以-1
+            }
+            oUL.innerHTML = str;//输出渲染；
+            onOFF = !onOFF;
+        } else {
+            back(arr);//调用反序函数；
+            var str2 = '';
+            for (var k = 0; k < arr.length; k++) {
+                var a = arr[k];//此时设置一变量存储我们改变了的数组的每一项；
+                str2 += '<li><img src="img/' + arr[k] + '.jpg" alt=""><p>' + arr2[a - 1] + '</p></li>'
+            }
+            oUL.innerHTML = str2;
+            onOFF = !onOFF;
+            this.innerHTML = "从大到小"
+        }
+    };
+    function order(Arr) {//构造正排函数；
+        Arr.sort(function (a, b) {
+            return a - b;
+        });
+    }
+
+    function back(Arr) {//构造倒排函数；
+        Arr.sort(function (a, b) {
+            return b - a;
+        });
+    }
+
+    function Random(Arr) {//构造打乱函数；
+        Arr.sort(function (a, b) {
+            return Math.random() - 0.5;
+        })
+    }
+    btnS[1].onclick = function () {
+        var str = '';
+        Random(arr);
+     /*   console.log(arr);*/
+        for (var i = 0; i < arr.length; i++) {
+            var m = arr[i];//此时设置一变量存储我们改变了的数组的每一项；
+            str += '<li><img src="img/' + arr[i] + '.jpg" alt=""><p>' + arr2[m - 1] + '</p></li>'
+        }
+        oUL.innerHTML = str;
+    }
+
+</script>
