@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			DOM
+				document本质是字符串，js在解析页面的时候，调用js的解析引擎把html内容转成对象，js有很多对象的方法，操作页面元素就像我们操作js一样简单
+				在页面解析的时候，会把文档里的html解析成DOM树(对象)，DOM对象下的内容就叫该对象下的节点，我们操作页面其实操作的就是这些节点
+				节点会有很多很多，类型也不一样，操作方法就不一样
+				节点类型有12种，比如标签是一种节点，文字是一种节点，注释也是一种节点
+				ELEMENT_NODE 	                1
+				ATTRIBUTE_NODE 	                2
+				TEXT_NODE 	                    3
+				DATA_SECTION_NODE 	            4
+				ENTITY_REFERENCE_NODE 	        5
+				ENTITY_NODE 	                6
+				PROCESSING_INSTRUCTION_NODE 	7
+				COMMENT_NODE 	                8
+				DOCUMENT_NODE 	                9
+				DOCUMENT_TYPE_NODE 	            10
+				DOCUMENT_FRAGMENT_NODE 	        11
+				NOTATION_NODE 	                12
+				
+			DOM结构
+			
+							document
+							
+							  html
+							  根元素
+					head                body
+					
+					title               div
+					
+								span    文字内容     <!--注释-->
+								
+								a
+			结构关系
+				兄弟关系
+				父子关系
+				祖孙关系
+		-->
+	</body>
+</html>

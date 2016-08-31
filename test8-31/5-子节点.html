@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<p>
+				<span></span>
+			</p>
+		</div>
+		<script>
+			/*
+			 	node.childNodes
+			 		获取该元素节点下的所有子节点
+			 		第一级子节点
+			 		有兼容性
+			 			标准:所有第一级子节点
+			 			非标准：所有第一级元素子节点
+			 	node.children
+			 		获取的该元素节点下第一级所有元素子节点
+			 		没有兼容性
+			 		不是w3c标准
+			 	
+			 * */
+			var box = document.getElementById('box');
+//			var child = box.childNodes;
+			var child = box.children;
+			alert(child[0].nodeName);
+		</script>
+	</body>
+</html>

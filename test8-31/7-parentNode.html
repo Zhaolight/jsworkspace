@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li>内容1</li>
+			<li>内容2</li>
+			<li>内容3</li>
+			<li>内容4</li>
+		</ul>
+		<script>
+			/*
+			 	node.parentNode
+			 		父节点，只能读
+			 * 
+			 * */
+			var lis = document.getElementsByTagName('li');
+			for(var i=0;i<lis.length;i++){
+				lis[i].onclick = function(){
+					alert(this.parentNode)
+				}
+			}
+		</script>
+	</body>
+</html>

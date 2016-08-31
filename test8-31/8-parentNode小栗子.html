@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li>内容1<span>改变颜色</span></li>
+			<li>内容2<span>改变颜色</span></li>
+			<li>内容3<span>改变颜色</span></li>
+			<li>内容4<span>改变颜色</span></li>
+			<li>内容5<span>改变颜色</span></li>
+			<li>内容6<span>改变颜色</span></li>
+		</ul>
+		<script>
+			var spans = document.getElementsByTagName('span');
+			for(var i=0;i<spans.length;i++){
+				spans[i].onclick = function(){
+					this.parentNode.style.background = 'red';
+				}
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul {
+            width: 300px;
+            list-style: none;
+        }
+
+        li {
+            margin: 10px 0;
+            height: 30px;
+            background: #CCCCCC;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var lis = document.getElementsByTagName('li');
+            for (var i = 0; i < lis.length; i++) {
+                lis[i].onmouseover = function () {
+                    var prev = this.previousElementSibling;
+                    var next = this.nextElementSibling;
+                    this.style.background = "red";
+                    if (prev) {
+                        prev.style.background = 'blue';
+                    }
+                    if (next) {
+                        next.style.background = 'yellow';
+                    }
+                };
+                lis[i].onmouseout = function () {
+                    for (var i = 0; i < lis.length; i++) {
+                        lis[i].style.cssText = '';
+                    }
+                }
+            }
+
+        }
+    </script>
+</head>
+<body>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+</body>
+</html>

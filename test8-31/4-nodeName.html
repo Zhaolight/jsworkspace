@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<!--注释-->
+			文字
+			<span></span>
+		</div>
+		<script>
+			/*
+			 	node.nodeName
+			 		查看节点名字
+			 		所有节点都有的
+			 	E.tagName
+			 		只有标签元素才有
+			 * */
+			var box = document.getElementById('box');
+			//元素节点类型 - 标签名（大写）
+			console.log(box.nodeName);
+			box.className = 'abc';
+			var attrs = box.attributes;
+			//属性节点类型 - 属性名（小写）
+			console.log(attrs[1].nodeName);
+			var child = box.childNodes;
+			//文本节点类型 - #text
+			console.log(child[0].nodeName);
+			//注释节点类型 - #comment
+			console.log(child[1].nodeName);
+			//文档节点类型 - #document
+			console.log(document.nodeName);
+			//只有标签元素才有 - 标签名（大写）
+			console.log(box.tagName);
+		</script>
+	</body>
+</html>

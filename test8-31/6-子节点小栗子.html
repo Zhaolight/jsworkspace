@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul{
+				margin:0;
+				padding:0;
+				list-style: none;
+				height: 30px;
+			}
+			li{
+				width:50px;
+				height: 28px;
+				border:1px solid #000;
+				float: left;
+				text-align: center;
+				line-height: 28px;
+				margin-right:5px;
+				position: relative;
+			}
+			p{
+				margin:0;
+			}
+			li div,li p{
+				height: 28px;
+				border:1px solid red;
+				text-align: center;
+				line-height: 28px;
+				position: absolute;
+				bottom: -30px;
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li>
+				内容一
+				<div>
+					图片一
+				</div>
+			</li>
+			<li>
+				内容二
+			</li>
+			<li>
+				内容三
+				<p>
+					文字三
+				</p>
+			</li>
+			<li>
+				内容四
+				<div>
+					图片四
+				</div>
+			</li>
+			<li>
+				内容五
+			</li>
+			<li>
+				内容六
+				<p>
+					文字六
+				</p>
+			</li>
+		</ul>
+		<script>
+			var lis = document.getElementsByTagName('li');
+			for(var i=0;i<lis.length;i++){
+				lis[i].onmouseover = function(){
+					var child = this.children[0];
+					if(child){
+						child.style.display = 'block';
+					}
+				}
+				lis[i].onmouseout = function(){
+					var child = this.children[0];
+					if(child){
+						child.style.display = '';
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

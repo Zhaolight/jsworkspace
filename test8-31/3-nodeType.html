@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<!--注释-->
+			文字
+			<span></span>
+		</div>
+		<script>
+			/*
+			 	node.nodeType
+			 		查询节点类型
+			 		返回的是该节点类型的数字
+			 		
+			 	常用节点类型
+			 		元素节点类型          1
+			 		属性节点类型          2
+			 		文本节点类型          3
+			 		注释节点类型          8
+			 		文档节点类型          9
+			 * 
+			 * */
+			var box = document.getElementById('box');
+			//元素节点类型   - 1
+			console.log(box.nodeType);
+			//attributes属性集合
+			var attrs = box.attributes;
+			//属性节点类型  - 2
+			console.log(attrs[0]);
+			//childNodes子节点集合
+			var child = box.childNodes;
+			console.log(child);
+			//文本节点类型  - 3
+			console.log(child[0].nodeType);
+			//注释节点类型   - 8
+			console.log(child[1].nodeType);
+			//文档节点类型   - 9
+			console.log(document.nodeType);
+			
+		</script>
+	</body>
+</html>

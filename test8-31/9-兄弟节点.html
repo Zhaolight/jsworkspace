@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<ul>
+			<li>内容1</li>
+			<li>内容2</li>
+			<li>内容3</li>
+			<li>内容4</li>
+			<li>内容5</li>
+			<li>内容6</li>
+		</ul>
+		<script>
+			/*
+			 	兄弟节点
+			 		node.previousElementSibling
+			 			上一个兄弟元素节点
+			 		node.nextElementSibling
+			 			下一个兄弟元素节点
+			 		
+			 		E.firstElementChild
+			 			E下边第一个子元素节点
+			 		E.lastElementChild
+			 			E下边最后一个子元素节点
+			 * */
+			var ul = document.getElementsByTagName('ul')[0];
+			var lis = document.getElementsByTagName('li');
+			lis[2].previousElementSibling.style.background = 'green';
+			lis[2].nextElementSibling.style.background = 'yellow';
+			ul.firstElementChild.style.background = 'red';
+			ul.lastElementChild.style.background = 'blue';
+		</script>
+	</body>
+</html>

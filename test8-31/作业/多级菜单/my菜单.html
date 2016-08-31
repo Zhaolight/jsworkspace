@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>My</title>
+    <style>
+        ul {
+            list-style: none;
+        }
+
+        #list ul {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<ul id="list">
+    <li>
+        <h2>+第一级</h2>
+        <ul>
+            <li>
+                <h2>+第二级</h2>
+                <ul>
+                    <li>
+                        <h2>+第三级</h2>
+                        <ul>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>第三级</h2>
+                    </li>
+                    <li>
+                        <h2>第三级</h2>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h2>+第二级</h2>
+                <ul>
+                    <li>
+                        <h2>+第三级</h2>
+                        <ul>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>第三级</h2>
+                    </li>
+                    <li>
+                        <h2>第三级</h2>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h2>第二级</h2>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <h2>+第一级</h2>
+        <ul>
+            <li>
+                <h2>+第二级</h2>
+                <ul>
+                    <li>
+                        <h2>+第三级</h2>
+                        <ul>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>第三级</h2>
+                    </li>
+                    <li>
+                        <h2>第三级</h2>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h2>第二级</h2>
+            </li>
+            <li>
+                <h2>第二级</h2>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <h2>+第一级</h2>
+        <ul>
+            <li>
+                <h2>+第二级</h2>
+                <ul>
+                    <li>
+                        <h2>+第三级</h2>
+                        <ul>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>+第三级</h2>
+                        <ul>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>第三级</h2>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h2>第二级</h2>
+            </li>
+            <li>
+                <h2>第二级</h2>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <h2>+第一级</h2>
+        <ul>
+            <li>
+                <h2>+第二级</h2>
+                <ul>
+                    <li>
+                        <h2>+第三级</h2>
+                        <ul>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>+第三级</h2>
+                        <ul>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                            <li>
+                                <h2>第四级</h2>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h2>第三级</h2>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h2>第二级</h2>
+            </li>
+            <li>
+                <h2>第二级</h2>
+            </li>
+        </ul>
+    </li>
+</ul>
+<script type="text/javascript">
+    var h2 = document.getElementsByTagName('h2');
+    for (var i = 0; i < h2.length; i++) {
+        h2[i].onclick = function () {
+            var next = this.nextElementSibling;
+            if (next) {
+                if (this.onOFF) {
+                    next.style.display = "none";
+                } else {
+                    next.style.display = "block";
+                }
+                this.onOFF = !this.onOFF;
+            }
+        }
+    }
+</script>
+</body>
+</html>
+
+
+
+
+
